@@ -1,0 +1,76 @@
+/* General Table Format */
+.list-table-format {
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 0.5fr;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    font-size: 14px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Header */
+.list-table-format.title {
+    background: linear-gradient(135deg, #00796B, #004D40);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px 8px 0 0;
+    font-size: 15px;
+}
+
+/* Table Row Hover Effect */
+.list-table-format:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Image Styling */
+.list-table-format img {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 2px solid #64CCC5;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Image Hover Effect */
+.list-table-format img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.remove-btn {
+    padding: 6px 12px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background-color: #c9302c;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .list-table-format {
+        grid-template-columns: 1fr 3fr 1fr;
+        gap: 15px;
+        padding: 12px;
+    }
+
+    .list-table-format.title {
+        display: none; /* Hide table header on small screens */
+    }
+}

@@ -1,0 +1,129 @@
+.customer-reviews {
+    text-align: center;
+    padding: 60px 20px;
+    /* background: linear-gradient(135deg, #f9f9f9 30%, #e3f2fd 100%); */
+    margin-top: 80px;
+}
+
+.customer-reviews h2 {
+    font-size: 2.8rem;
+    color: #2E8B57;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.customer-reviews h2::after {
+    content: "";
+    width: 60%;
+    height: 4px;
+    background: #2E8B57;
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: lineExpand 1s ease-in-out infinite alternate;
+}
+
+@keyframes lineExpand {
+    0% { width: 40%; }
+    100% { width: 60%; }
+}
+
+.reviews-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.review-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.12);
+    max-width: 350px;
+    text-align: left;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.review-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 5px;
+    background: #2E8B57;
+    transition: left 0.5s ease-in-out;
+}
+
+.review-card:hover::before {
+    left: 0;
+}
+
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.18);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.review-header img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2E8B57;
+    transition: transform 0.3s ease-in-out;
+}
+
+.review-card:hover .review-header img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.review-header h4 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0;
+    font-weight: bold;
+}
+
+.stars {
+    color: #FFD700;
+    font-size: 1.1rem;
+}
+
+.review-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .customer-reviews h2 {
+        font-size: 2.2rem;
+    }
+    
+    .reviews-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .review-card {
+        max-width: 90%;
+    }
+}

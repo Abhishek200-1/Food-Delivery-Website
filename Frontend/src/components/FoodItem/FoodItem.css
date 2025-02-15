@@ -1,0 +1,172 @@
+.food-item {
+    width: 100%;
+    max-width: 280px;
+    height: 400px; /* Fixed height for uniformity */
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border 0.3s ease-in-out;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent; /* Default border */
+    position: relative;
+}
+
+/* Glow & Scale Effect on Hover */
+.food-item:hover {
+    transform: scale(1.08);
+    box-shadow: 0px 8px 20px rgba(46, 139, 87, 0.3); /* Green glow effect */
+    /* border: 2px solid #2E8B57; */
+}
+
+/* Image Container */
+.food-item-img-container {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(to bottom, #eaf5ea, white); /* Subtle green gradient */
+}
+
+/* Image Zoom Effect */
+.food-item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0px 0px;
+    transition: transform 0.4s ease-in-out;
+}
+
+.food-item:hover .food-item-image {
+    transform: scale(1.05);
+}
+
+/* Info Section */
+.food-item-info {
+    flex-grow: 1;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Name & Rating */
+.food-item-name-rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.food-item-name-rating p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2E8B57; /* Green text */
+    transition: color 0.3s ease-in-out;
+}
+
+.food-item:hover .food-item-name-rating p {
+    color: #1E6B45; /* Darker green on hover */
+}
+
+/* Description */
+.food-item-desc {
+    color: #4A4A4A;
+    font-size: 14px;
+    text-align: left;
+    min-height: 40px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    margin-bottom: 8px;
+    transition: color 0.3s ease-in-out;
+}
+
+.food-item:hover .food-item-desc {
+    color: #333; /* Darker text for better contrast */
+}
+
+/* Price */
+.food-item-price {
+    color: #2E8B57;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: auto;
+    text-align: right;
+}
+
+/* Add to Cart Icon - Bouncing Animation */
+.food-item-img-container .add {
+    width: 40px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: rgba(46, 139, 87, 0.8); /* Green background */
+    padding: 5px;
+    transition: transform 0.3s ease-in-out, background 0.3s;
+}
+
+.food-item-img-container .add:hover {
+    transform: scale(1.1);
+    background: rgba(46, 139, 87, 1);
+}
+
+
+
+/* Counter Container - Fade In Effect */
+.food-item-counter {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, opacity 0.3s;
+    border: 2px solid #2E8B57; /* Green border */
+    opacity: 0;
+}
+
+.food-item:hover .food-item-counter {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Counter Button Hover */
+.food-item-counter img {
+    width: 25px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.food-item-counter img:hover {
+    transform: scale(1.1);
+}
+
+/* Ensure Responsive Consistency */
+@media (max-width: 768px) {
+    .food-item {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .food-item-img-container {
+        height: 160px;
+    }
+
+    .food-item-info {
+        padding: 12px;
+    }
+
+    .food-item-price {
+        font-size: 18px;
+    }
+}
