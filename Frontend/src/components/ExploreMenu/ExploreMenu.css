@@ -26,14 +26,15 @@
     content: "";
     display: block;
     width: 50px;
-    height: 3px;
+    height: 4px;
     background: #2E8B57;
     margin: 8px auto;
     transition: width 0.3s ease-in-out;
+    border-radius: 4px;
 }
 
 .explore-menu h1:hover::after {
-    width: 70px;
+    width: 15%;
 }
 
 /* Menu Description */

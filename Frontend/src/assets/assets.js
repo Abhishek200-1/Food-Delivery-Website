@@ -22,6 +22,9 @@ import menu_5 from './menu_5.png'
 import menu_6 from './menu_6.png'
 import menu_7 from './menu_7.png'
 import menu_8 from './menu_8.png'
+import howitworks_img1 from './howitworks_img1.png'
+import howitworks_img2 from './howitworks_img2.png'
+import howitworks_img3 from './howitworks_img3.png'
 
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
@@ -103,7 +106,10 @@ export const assets = {
     profile_icon,
     logout_icon,
     bag_icon,
-    parcel_icon
+    parcel_icon,
+    howitworks_img1,
+    howitworks_img2,
+    howitworks_img3
 }
 
 export const menu_list = [
