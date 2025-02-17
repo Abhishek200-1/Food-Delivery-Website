@@ -1,75 +1,147 @@
-.login-pop-up{
-    position: absolute;
-    z-index: 1;
+/* Background Overlay */
+.login-pop-up {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: #00000090;
-    display: grid;
+    background: rgba(0, 0, 0, 0.75); /* Darker for better focus */
+    backdrop-filter: blur(10px); /* Smooth glass effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.4s ease-in-out;
+    z-index: 1000;
 }
 
-.login-pop-up-container{
-    place-self: center;
-    width: max(23vw, 330px);
-    color: #808080;
-    background-color: white;
+/* Popup Container */
+.login-pop-up-container {
+    width: max(30vw, 380px);
+    background: rgba(255, 255, 255, 0.15); /* Glassmorphism */
+    border-radius: 14px;
+    padding: 35px;
+    backdrop-filter: blur(15px);
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding: 25px 30px;
-    border-radius: 8px;
-    font-size: 14px;
-    animation: fadeIn 0.5s;
+    font-size: 15px;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+    animation: slideUp 0.5s ease-in-out;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.login-pop-up-title{
+/* Close Button */
+.login-pop-up-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
 }
 
-.login-pop-up-title img{
-    width: 16px;
+.login-pop-up-title img {
+    width: 18px;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-.login-popup-inputs{
+.login-pop-up-title img:hover {
+    transform: rotate(180deg);
+    opacity: 0.8;
+}
+
+/* Input Fields */
+.login-popup-inputs {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
 }
 
-.login-popup-inputs input{
+.login-popup-inputs input {
     outline: none;
-    border: 1px solid #c9c9c9;
-    padding: 10px;
-    border-radius: 4px;
-}
-
-.login-pop-up-container button{
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.25);
     color: white;
-    background-color: #2E8B57;
-    font-size: 15px;
-    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
-.login-popup-condition{
+.login-popup-inputs input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.login-popup-inputs input:focus {
+    border-color: #6EFFD8;
+    box-shadow: 0 0 12px rgba(46, 139, 87, 0.5);
+}
+
+/* Stylish Login Button */
+.login-pop-up-container button {
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    color: white;
+    background: linear-gradient(135deg, #00C853, #00695C);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 5px 12px rgba(0, 200, 83, 0.4);
+}
+
+.login-pop-up-container button:hover {
+    background: linear-gradient(135deg, #00695C, #00C853);
+    transform: scale(1.07);
+    box-shadow: 0 7px 14px rgba(0, 200, 83, 0.5);
+}
+
+/* Checkbox & Terms */
+.login-popup-condition {
     display: flex;
-    align-items: start;
-    gap: 8px;
-    margin-top: -15px;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: white;
 }
 
-
-.login-popup-condition input{
-    margin-top: 5px;
-}
-
-.login-pop-up p span{
-    color: #2E8B57;
-    font-weight: 500;
+.login-popup-condition input {
     cursor: pointer;
+    transform: scale(1.2);
+}
+
+/* Link Styling */
+.login-pop-up p span {
+    color: #64CCC5;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.login-pop-up p span:hover {
+    color: #00C853;
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .login-pop-up-container {
+        width: 90%;
+        padding: 25px;
+    }
 }

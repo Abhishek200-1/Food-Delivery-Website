@@ -1,0 +1,113 @@
+/* Main Container */
+.add {
+    width: 70%;
+    margin-left: max(5vw, 25px);
+    margin-top: 50px;
+    color: #444; /* Darker shade for better readability */
+    font-size: 16px;
+    border-radius: 12px;
+}
+
+/* Form Styling */
+.add form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Image Upload */
+.add-image-upload img {
+    width: 120px;
+    border-radius: 8px;
+    border: 2px solid #B2DFDB; /* Soft teal border */
+    padding: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.add-image-upload img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Name & Description */
+.add-product-name,
+.add-product-description {
+    width: max(40%, 280px);
+}
+
+/* Input & Textarea Styling */
+.add-product-name input,
+.add-product-description textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid #A7C7E7; /* Soft blue shade */
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.add-product-name input:focus,
+.add-product-description textarea:focus {
+    border-color: #00796B; /* Deep teal */
+    box-shadow: 0px 0px 8px rgba(0, 121, 107, 0.2);
+    outline: none;
+}
+
+/* Category & Price Section */
+.add-category-price {
+    display: flex;
+    gap: 30px;
+}
+
+/* Select & Input Styling */
+.add-category-price select,
+.add-category-price input {
+    max-width: 140px;
+    padding: 12px;
+    border: 1.5px solid #8E8E8E;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.add-category-price select:focus,
+.add-category-price input:focus {
+    border-color: #00796B;
+    box-shadow: 0px 0px 8px rgba(0, 121, 107, 0.2);
+}
+
+/* Submit Button */
+.add-button {
+    max-width: 275px;
+    border: none;
+    padding: 12px;
+    background: linear-gradient(135deg, #00796B, #004D40); /* Gradient for a modern effect */
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.add-button:hover {
+    background: linear-gradient(135deg, #004D40, #00251A);
+    transform: translateY(-3px);
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .add {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add-category-price {
+        flex-direction: column;
+    }
+
+    .add-category-price select,
+    .add-category-price input {
+        max-width: 100%;
+    }
+}

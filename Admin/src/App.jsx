@@ -5,8 +5,10 @@ import { Route, Routes } from 'react-router-dom'
 import Add from './pages/Add/Add'
 import List from './pages/List/List'
 import Orders from './pages/Orders/Orders'
+import WelcomePage from './pages/WelcomePage/WelcomePage'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import UpdateFoodDetails from './pages/UpdateFoodDetails/UpdateFoodDetails'
 
 const App = () => {
 
@@ -20,9 +22,11 @@ const App = () => {
       <div className="app-content">
         <Sidebar/>
         <Routes>
+          <Route path='/' element={<WelcomePage url={url}/>} />
           <Route path='/add' element={<Add url={url}/>} />
           <Route path='/list' element={<List url={url}/>} />
           <Route path='/orders' element={<Orders url={url}/>} />
+          <Route path='/update' element={<UpdateFoodDetails url={url}/>} />
         </Routes>
       </div>
     </>

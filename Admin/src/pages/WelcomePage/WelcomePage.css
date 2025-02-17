@@ -1,0 +1,84 @@
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background: linear-gradient(135deg, #f0fff0, #e6f7e6); /* Light greenish background */
+    color: #333; /* Darker text for contrast */
+    font-family: "Poppins", sans-serif;
+    padding: 20px;
+}
+
+/* Main Heading */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2E8B57; /* Deep green for better contrast */
+}
+
+/* Subtext */
+.welcome-container p {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Brand Logo Text Effect */
+.brand-logo {
+    font-size: 3.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #008000, #006400);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 3px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Welcome Box */
+.welcome {
+    width: 82%;
+    background: #fff; /* White background for better readability */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a professional touch */
+    font-size: 16px;
+    color: #444;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    p {
+        font-size: 1.1rem;
+    }
+    
+    .brand-logo {
+        font-size: 3rem;
+    }
+
+    .welcome {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+/* Smooth Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

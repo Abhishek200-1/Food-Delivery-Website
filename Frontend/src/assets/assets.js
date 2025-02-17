@@ -4,7 +4,15 @@ import logo2 from './logo2.png'
 import logo3 from './logo3.png'
 import header_img from './header_img.png'
 import header_img2 from './header_img2.png'
-import header_img3 from './header_img3.png'
+import header_img4 from './header_img4.jpg'
+import header_img5 from './header_img5.jpg'
+import header_img6 from './header_img6.jpg'
+import header_img7 from './header_img7.jpg'
+import header_img8 from './header_img8.jpg'
+import header_img9 from './header_img9.jpg'
+import header_img10 from './header_img10.jpg'
+import header_img11 from './header_img11.jpg'
+import header_img12 from './header_img12.jpg'
 import search_icon from './search_icon.png'
 import menu_1 from './menu_1.png'
 import menu_2 from './menu_2.png'
@@ -71,7 +79,15 @@ export const assets = {
     basket_icon,
     header_img,
     header_img2,
-    header_img3,
+    header_img4,
+    header_img5,
+    header_img6,
+    header_img7,
+    header_img8,
+    header_img9,
+    header_img10,
+    header_img11,
+    header_img12,
     search_icon,
     rating_starts,
     add_icon_green,
@@ -335,7 +351,7 @@ export const food_list = [
         category: "Noodles"
     }, {
         _id: "30",
-        name: "Veg Noodles",
+        name: " ",
         image: food_30,
         price: 12,
         description: "Food provides essential nutrients for overall health and well-being",

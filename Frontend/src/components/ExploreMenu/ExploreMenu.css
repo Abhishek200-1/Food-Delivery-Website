@@ -48,7 +48,7 @@
 /* Menu List - Scrollable */
 .explore-menu-list {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Ensures all items are visible */
     align-items: center;
     gap: 30px;
     text-align: center;
@@ -57,6 +57,7 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Hide scrollbar */
+    white-space: nowrap;
 }
 
 /* Hide Scrollbar */
@@ -69,8 +70,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease-in-out;
+    flex: 0 0 auto; /* Prevent shrinking */
     scroll-snap-align: center;
+    transition: transform 0.3s ease-in-out;
 }
 
 /* Menu Item Image */
@@ -84,7 +86,6 @@
 
 /* Hover Effect */
 .explore-menu-list-item img:hover {
-    transform: scale(1.1);
     box-shadow: 0px 5px 15px rgba(46, 139, 87, 0.4);
 }
 
@@ -93,6 +94,7 @@
     border: 4px solid #2E8B57;
     padding: 2px;
     box-shadow: 0px 0px 10px rgba(46, 139, 87, 0.6);
+    transition: all 0.3s ease-in-out;
 }
 
 /* Menu Item Text */
@@ -118,6 +120,14 @@
     border: none;
 }
 
+/* Slide Indicator */
+.slide-indicator {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #808080;
+    font-style: italic;
+}
+
 /* Responsive Styles */
 @media (max-width: 1050px) {
     .explore-menu-text {
@@ -132,8 +142,15 @@
     }
 
     .explore-menu-list {
-        justify-content: center;
+        justify-content: flex-start;
         gap: 20px;
+        overflow-x: auto; /* Ensure horizontal scrolling */
+        padding-bottom: 15px;
+        scroll-snap-type: x mandatory;
+    }
+
+    .explore-menu-list-item {
+        flex: 0 0 auto; /* Ensures proper alignment */
     }
 
     .explore-menu-list-item img {

@@ -47,7 +47,7 @@ const StoreContextProvider = (props) => {
         }
         return totalAmount;
     }
-
+    // frontend par food dala load krne k liye
     const fetchFoodList = async() => {
         const response = await axios.get(url +"/api/food/list");
         setFoodList(response.data.data)

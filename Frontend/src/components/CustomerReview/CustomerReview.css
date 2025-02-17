@@ -1,129 +1,116 @@
+.customer-review {
+  width: 100%;
+  min-height: 60vh;
+  background: url('../../assets/header_img7.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 80px;
+  border-radius: 20px;
+}
+
+/* Reviews Section */
 .customer-reviews {
-    text-align: center;
-    padding: 60px 20px;
-    /* background: linear-gradient(135deg, #f9f9f9 30%, #e3f2fd 100%); */
-    margin-top: 80px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 40px 20px;
 }
 
 .customer-reviews h2 {
-    font-size: 2.8rem;
-    color: #2E8B57;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
-    font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
-.customer-reviews h2::after {
-    content: "";
-    width: 60%;
-    height: 4px;
-    background: #2E8B57;
-    position: absolute;
-    left: 50%;
-    bottom: -8px;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    animation: lineExpand 1s ease-in-out infinite alternate;
-}
-
-@keyframes lineExpand {
-    0% { width: 40%; }
-    100% { width: 60%; }
-}
-
+/* Review Cards Container */
 .reviews-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* Review Card Styling */
 .review-card {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.12);
-    max-width: 350px;
-    text-align: left;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    position: relative;
-    overflow: hidden;
-}
-
-.review-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 5px;
-    background: #2E8B57;
-    transition: left 0.5s ease-in-out;
-}
-
-.review-card:hover::before {
-    left: 0;
+  background: rgba(255, 255, 255, 0.15); /* Slight transparency */
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: white;
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
 }
 
 .review-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.18);
+  transform: scale(1.05);
 }
 
+/* Review Header */
 .review-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .review-header img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #2E8B57;
-    transition: transform 0.3s ease-in-out;
-}
-
-.review-card:hover .review-header img {
-    transform: rotate(10deg) scale(1.1);
-}
-
-.review-header h4 {
-    font-size: 1.3rem;
-    color: #333;
-    margin: 0;
-    font-weight: bold;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 
 .stars {
-    color: #FFD700;
-    font-size: 1.1rem;
+  color: gold;
+  font-size: 1.2rem;
 }
 
-.review-card p {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    font-style: italic;
+/* 📱 Responsive Design */
+@media screen and (max-width: 1024px) {
+  .review-card {
+    width: 300px;
+  }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .customer-reviews h2 {
-        font-size: 2.2rem;
-    }
-    
-    .reviews-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .review-card {
-        max-width: 90%;
-    }
+@media screen and (max-width: 768px) {
+  .customer-review {
+    min-height: 80vh;
+    padding: 10px;
+  }
+
+  .customer-reviews h2 {
+    font-size: 1.8rem;
+  }
+
+  .reviews-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .review-card {
+    width: 90%;
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .customer-review {
+    padding: 10px;
+    min-height: 90vh;
+  }
+
+  .customer-reviews h2 {
+    font-size: 1.5rem;
+  }
+
+  .review-card {
+    width: 95%;
+    padding: 15px;
+  }
 }

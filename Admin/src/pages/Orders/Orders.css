@@ -1,0 +1,98 @@
+/* Order Item Container */
+.order-item {
+    display: grid;
+    grid-template-columns: 60px 2fr 1fr 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    border: 1px solid #2E8B57;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: #505050;
+    background: linear-gradient(135deg, #ffffff, #f9f9f9);
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.order-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Image Styling */
+.order-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 3px solid #2E8B57;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.order-item img:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Order Name & Food Styling */
+.order-item-food, .order-item-name {
+    font-weight: 700;
+    color: #333;
+    font-size: 16px;
+}
+
+.order-item-name {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+/* Address */
+.order-item-address {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Status Dropdown */
+.order-item select {
+    background-color: #2E8B57;
+    color: white;
+    border: none;
+    width: max(11vw, 130px);
+    padding: 12px;
+    outline: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Dropdown Hover Effect */
+.order-item select:hover {
+    background-color: #1d6a44;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 1000px) {
+    .order-item {
+        font-size: 13px;
+        grid-template-columns: 1fr 2fr 1fr;
+        padding: 15px;
+        margin: 15px;
+    }
+
+    .order-item select {
+        padding: 10px;
+        font-size: 13px;
+        width: max(8vw, 110px);
+    }
+
+    .order-item img {
+        width: 50px;
+        height: 50px;
+    }
+}

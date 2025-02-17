@@ -1,0 +1,22 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs
+logs/
+*.log
+debug.log
+
+# Database & Sessions
+*.sqlite
+*.sqlite3
+dump.rdb
+sessions/

@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './PlaceOrder.css';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } = useContext(StoreContext);
 
+
+  // to collect address form data
   const [data, setData] = useState({
     firstname: "",
     lastname: "",
@@ -35,23 +38,35 @@ const PlaceOrder = () => {
         orderItems.push(itemInfo)
       }
     })
-
+    // generated food send data
     let orderData = {
       address:data,
       items:orderItems,
       amount:getTotalCartAmount()+15,
     }
-
+    // sended to api
     let response = await axios.post(url+"/api/order/place",orderData,{headers:{token}});
+    // getting response
     if (response.data.success) {
       const {session_url} = response.data;
       window.location.replace(session_url);
     }
     else
     {
-      alert("hello");
+      alert("Error");
     }
   }
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      if (!token) {
+        navigate("/cart")
+      }
+      else if(getTotalCartAmount()===0){
+        navigate("/cart")
+      }
+  },[token])
 
   return (
     <div>

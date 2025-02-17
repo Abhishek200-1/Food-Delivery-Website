@@ -28,6 +28,7 @@ const Navbar = ({setShowLogin}) => {
         <a href='#explore-menu' onClick={() => setmenu("menu")} className={menu === "menu"?"active":""}>Menu</a>
         <a href='#app-download' onClick={() => setmenu("mobile-app")} className={menu === "mobile-app"?"active":""}>Mobile App</a>
         <a href='#review' onClick={() => setmenu("customer-review")} className={menu === "customer-review"?"active":""}>Customers</a>
+        <a href='#about-us' onClick={() => setmenu("about-us")} className={menu === "about-us"?"active":""}>About Us</a>
         <a href='#footer' onClick={() => setmenu("contact-us")} className={menu === "contact-us"?"active":""}>Contact Us</a>
       </ul>
 
@@ -37,11 +38,12 @@ const Navbar = ({setShowLogin}) => {
         <Link to='/cart'><img src={assets.basket_icon} alt="" /></Link>
             <div className={getTotalCartAmount()===0? "": "dot"}></div>
         </div>
+        {/* agar button loken h toh */}
         {!token?<button onClick={()=> setShowLogin(true)}>Sign In</button>
         :<div className='navbar-profile'>
             <img src={assets.profile_icon} alt="" />
             <ul className='nav-profile-dropdown'>
-              <li><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
+              <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
               <hr />
               <li onClick={logout}><img src={assets.logout_icon} alt=""  /><p>Logout</p></li>
             </ul>
