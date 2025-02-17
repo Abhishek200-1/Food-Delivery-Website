@@ -11,9 +11,14 @@
     color: #262626;
     font-weight: 600;
     font-size: 26px;
-    margin-top: 15px;
     position: relative;
     display: inline-block;
+}
+
+.explore-menu .menu-text{
+    margin-top: 20px;
+    margin-bottom: -15px;
+    color: #2E8B57;
 }
 
 /* Underline Effect for Heading */
