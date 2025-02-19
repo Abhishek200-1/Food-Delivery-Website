@@ -1,5 +1,4 @@
 # 🍔 Food Delivery Website 🚀
-# Project Name : NomNomGo.
 
 ## 📌 Overview
 This is a full-stack **Food Delivery Website** built using the **MERN (MongoDB, Express.js, React.js, Node.js) stack**. The platform allows users to browse restaurants, order food, track their orders, and make payments online.
