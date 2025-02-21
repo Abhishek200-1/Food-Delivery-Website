@@ -26,6 +26,16 @@ import howitworks_img1 from './howitworks_img1.png'
 import howitworks_img2 from './howitworks_img2.png'
 import howitworks_img3 from './howitworks_img3.png'
 
+import profile_icon2 from './profile_icon2.png'
+import logout_icon2 from './logout_icon2.png'
+import address_icon from './address_icon.png'
+import password_icon from './password_icon.png'
+import order_icon from './order_icon.png'
+import defoult_profile_icon from './defoult_profile_icon.png'
+
+
+
+
 import food_1 from './food_1.png'
 import food_2 from './food_2.png'
 import food_3 from './food_3.png'
@@ -109,7 +119,14 @@ export const assets = {
     parcel_icon,
     howitworks_img1,
     howitworks_img2,
-    howitworks_img3
+    howitworks_img3,
+    profile_icon2,
+    logout_icon2,
+    password_icon,
+    address_icon,
+    logout_icon2,
+    order_icon,
+    defoult_profile_icon
 }
 
 export const menu_list = [
