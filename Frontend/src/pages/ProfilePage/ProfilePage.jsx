@@ -6,6 +6,7 @@ import Order from '../../components/MyAccountComponents/Orders/Order';
 import MyAddress from '../../components/MyAccountComponents/MyAddress/MyAddress';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import ResetPassword from '../../components/MyAccountComponents/ResetPassword/ResetPassword';
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("profile"); // Manage which section to show
@@ -58,7 +59,7 @@ const ProfilePage = () => {
         {activeSection === "profile" && <ProfileForm/>}
         {activeSection === "orders" && <Order/>}
         {activeSection === "address" && <MyAddress/>}
-        {activeSection === "password" && <div className="profile-content">Password Manager Section</div>}
+        {activeSection === "password" && <ResetPassword/>}
       </div>
     </div>
   );
