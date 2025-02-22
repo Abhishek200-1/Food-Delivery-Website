@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './ProfilePage.css';
 import { assets } from '../../assets/assets';
 import ProfileForm from '../../components/MyAccountComponents/ProfileForm/ProfileForm';
 import Order from '../../components/MyAccountComponents/Orders/Order';
 import MyAddress from '../../components/MyAccountComponents/MyAddress/MyAddress';
+import { StoreContext } from '../../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("profile"); // Manage which section to show
+
+
+  const {token,setToken} = useContext(StoreContext);
+
+
+  const navigate = useNavigate();
+
+  // logout Function
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/")
+  }
 
   return (
     <div className='profile-page'>
@@ -31,7 +46,7 @@ const ProfilePage = () => {
             <img src={assets.password_icon} alt="Password Icon" />
             <p>Password Manager</p>
           </div>
-          <div className="profile-page-left-option" onClick={() => setActiveSection("logout")}>
+          <div className="profile-page-left-option" onClick={logout}>
             <img src={assets.logout_icon2} alt="Logout Icon" />
             <p>Logout</p>
           </div>
@@ -44,7 +59,6 @@ const ProfilePage = () => {
         {activeSection === "orders" && <Order/>}
         {activeSection === "address" && <MyAddress/>}
         {activeSection === "password" && <div className="profile-content">Password Manager Section</div>}
-        {activeSection === "logout" && <div className="profile-content">Logging out...</div>}
       </div>
     </div>
   );
