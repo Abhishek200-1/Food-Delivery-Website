@@ -1,0 +1,197 @@
+.my-address {
+    padding: 20px 20px;
+}
+
+/* Address Header with Title & Add Button */
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Title */
+.address-header h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+
+/* Underline Effect */
+.address-header h2::after {
+    content: "";
+    width: 60px;
+    height: 3px;
+    background: #2E8B57;
+    display: block;
+    margin: 8px auto 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.address-header h2:hover::after {
+    width: 80px;
+}
+
+/* Add Address Button */
+.add-address-btn {
+    background: #2E8B57;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(46, 139, 87, 0.2);
+}
+
+.add-address-btn:hover {
+    background: #1d6e43;
+    transform: scale(1.05);
+}
+
+/* Address List */
+.address-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Address Card */
+.address-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #2E8B57;
+    transition: transform 0.3s ease-in-out;
+    text-align: left;
+}
+
+/* Default Address */
+.address-card.default {
+    border-left: 5px solid #FFD700;
+}
+
+/* Hover Effect */
+.address-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Address Details */
+.address-details {
+    margin-bottom: 10px;
+}
+
+/* Address Name */
+.address-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Address Text */
+.address-text {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Remove Button */
+.remove-btn {
+    background: #FF6347;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.remove-btn:hover {
+    background: #d43f2f;
+}
+
+/* Address Form Modal */
+.address-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Address Form */
+.address-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 350px;
+    text-align: left;
+}
+
+/* Input Fields */
+.address-form input, .address-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.address-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+/* Form Actions */
+.address-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Save & Cancel Buttons */
+.save-btn, .cancel-btn {
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.save-btn {
+    background: #2E8B57;
+    color: white;
+}
+
+.cancel-btn {
+    background: #ccc;
+    color: #333;
+}
+
+.save-btn:hover {
+    background: #1d6e43;
+}
+
+.cancel-btn:hover {
+    background: #bbb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .address-form {
+        width: 90%;
+    }
+}

@@ -43,11 +43,11 @@ const Navbar = ({setShowLogin}) => {
         :<div className='navbar-profile'>
             <img src={assets.profile_icon} alt="" />
             <ul className='nav-profile-dropdown'>
-              <li onClick={() => navigate('/ProfilePage')}><img src={assets.logout_icon} alt=""  /><p>Profile</p></li>
+              <li onClick={() => navigate('/ProfilePage')}><img src={assets.profile_icon2} alt=""  /><p>My Account</p></li>
               <hr />
-              <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
+              <li onClick={() => navigate('/myorders')}><img src={assets.order_icon} alt="" /><p>Orders</p></li>
               <hr />
-              <li onClick={logout}><img src={assets.logout_icon} alt=""  /><p>Logout</p></li>
+              <li onClick={logout}><img src={assets.logout_icon2} alt=""  /><p>Logout</p></li>
             </ul>
         </div>}
       </div>

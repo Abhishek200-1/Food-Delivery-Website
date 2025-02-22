@@ -1,0 +1,106 @@
+.order-section {
+    padding: 20px 20px;
+    text-align: center;
+}
+
+/* Heading */
+.order-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: -80px;
+    margin-left: -650px;
+}
+
+/* Underline Effect */
+.order-section h2::after {
+    content: "";
+    width: 60px;
+    height: 3px;
+    background: #2E8B57;
+    display: block;
+    margin: 8px auto 0;
+    transition: width 0.3s ease-in-out;
+}
+
+.order-section h2:hover::after {
+    width: 80px;
+}
+
+/* Orders Container */
+.order-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* No Orders Found */
+.no-orders {
+    color: #555;
+    font-size: 1.2rem;
+}
+
+/* Order Card */
+.order-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #2E8B57;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.order-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Order Item Image */
+.order-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #2E8B57;
+}
+
+/* Order Details */
+.order-details {
+    flex: 1;
+    text-align: left;
+}
+
+/* Order Item Name */
+.order-items {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Order Price */
+.order-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2E8B57;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .order-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .order-image {
+        width: 40px;
+        height: 40px;
+    }
+}

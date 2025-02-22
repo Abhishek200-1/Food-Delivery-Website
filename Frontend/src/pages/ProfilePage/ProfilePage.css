@@ -1,198 +1,114 @@
 /* Profile Page Container */
 .profile-page {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 30px;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
-}
-
-/* Title */
-.profile-page h2 {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 2rem;
-    font-weight: 600;
-    color: #2E8B57;
-    text-align: center;
-    margin-top: 50px;
+    height: 100vh;
+    background: #f8f9fa;
+    padding: 20px;
 }
 
 /* Left Sidebar */
 .profile-page-left {
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 25%;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    gap: 10px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
 }
 
 /* Sidebar Options */
 .profile-page-left-option {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     padding: 12px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    background: #fff;
+    cursor: pointer;
     border-radius: 6px;
     transition: all 0.3s ease-in-out;
-    border: 1px solid #ddd;
 }
 
 .profile-page-left-option img {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
-.profile-page-left-option:hover {
+/* Hover and Active Effects */
+.profile-page-left-option:hover,
+.profile-page-left-option.active {
     background: #2E8B57;
     color: white;
-    transform: translateX(5px);
-}
-
-.profile-page-left-option:hover img {
-    filter: brightness(0) invert(1);
+    font-weight: 500;
 }
 
 /* Right Section */
 .profile-page-right {
     flex: 1;
     background: white;
+    border-radius: 10px;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Profile Picture Upload */
-.add-image-upload {
+    margin-left: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
 }
 
-.upload-label {
-    cursor: pointer;
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid #2E8B57;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.upload-label img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.upload-label:hover {
-    transform: scale(1.1);
-}
-
-/* Form Fields */
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* First & Last Name in Same Row */
-.input-row {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-/* Gender & Button in Same Row */
-.input-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.form-container label {
-    font-weight: 500;
-    color: #333;
-}
-
-.form-container input,
-.form-container select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    transition: all 0.3s ease-in-out;
-}
-
-.form-container input:focus,
-.form-container select:focus {
-    border-color: #2E8B57;
-    outline: none;
-    box-shadow: 0px 4px 8px rgba(46, 139, 87, 0.3);
-}
-
-/* Update Button */
-.update-btn {
-    border: none;
-    background: #2E8B57;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    width: max(15vw, 200px);
+/* Title */
+.profile-page h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2E8B57;
     text-align: center;
-    margin-top: 23px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
-.update-btn:hover {
-    background: #1d6e43;
-    transform: scale(1.05);
+/* Underline Effect */
+.profile-page h2::after {
+    content: "";
+    width: 50px;
+    height: 3px;
+    background: #2E8B57;
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
 }
 
-/* Responsive Styles */
-@media (max-width: 900px) {
+.profile-page h2:hover::after {
+    width: 80px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
     .profile-page {
         flex-direction: column;
         align-items: center;
-        padding: 20px;
     }
 
     .profile-page-left {
         width: 100%;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-around;
+        position: static;
+        padding: 15px;
     }
 
     .profile-page-right {
         width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
     }
+}
 
-    .input-row {
-        flex-direction: column;
-        gap: 10px;
+@media (max-width: 768px) {
+    .profile-page-left-option p {
+        display: none; /* Hide text and only show icons */
     }
 }

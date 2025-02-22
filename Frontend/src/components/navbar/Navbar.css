@@ -86,7 +86,7 @@
     position: absolute;
     right: 0;
     background-color: #fff;
-    padding: 12px 18px;
+    padding: 12px 30px;
     border-radius: 6px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     list-style: none;
@@ -94,6 +94,7 @@
     visibility: hidden;
     transform: translateY(-10px);
     transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s;
+    width: 175px;
 }
 
 .navbar-profile:hover .nav-profile-dropdown{
