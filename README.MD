@@ -58,7 +58,7 @@ Ensure you have the following installed:
    PORT=3000
    MONGO_URI= mongodb://localhost:27017/NomNomGo
    JWT_SECRET= your_jwt_secret
-   STRIPE_SECRET_KEY = your_stripe_secret_key
+   STRIPE_SECRET_KEY = your_stripe_secret_key_
    ```
 
 4. Start the development server:
