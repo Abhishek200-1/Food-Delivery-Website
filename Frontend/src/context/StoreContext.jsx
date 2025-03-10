@@ -10,7 +10,8 @@ const StoreContextProvider = (props) => {
     const url = "http://localhost:3000"
     // state variab;e
     const [token, setToken] = useState("");
-    // for food list
+    // for food list 
+    // hello
     const [food_list,setFoodList] = useState([])
     // h
     // functinality for add to cart
