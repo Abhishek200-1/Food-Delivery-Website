@@ -11,7 +11,7 @@ const StoreContextProvider = (props) => {
     // state variab;e
     const [token, setToken] = useState("");
     // for food list 
-    // hello
+    // hello how far
     const [food_list,setFoodList] = useState([])
     // h
     // functinality for add to cart
