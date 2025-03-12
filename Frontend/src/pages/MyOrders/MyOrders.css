@@ -2,6 +2,7 @@
     margin: 50px 0;
 }
 
+/* Container Styling */
 .my-orders .container {
     display: flex;
     flex-direction: column;
@@ -9,7 +10,57 @@
     margin-top: 30px;
 }
 
-/* Order Row Styling */
+/* 📅 Date Filter Section */
+.my-orders label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-right: 10px;
+}
+
+.my-orders input[type="date"] {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #2E8B57;
+    border-radius: 5px;
+    outline: none;
+    background: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+}
+
+.my-orders input[type="date"]:hover,
+.my-orders input[type="date"]:focus {
+    background: white;
+    border-color: #1d6a44;
+}
+
+/* 🔄 Reset Button */
+.my-orders button {
+    margin-left: 10px;
+    padding: 8px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #2E8B57, #1d6a44);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.my-orders button:hover {
+    background: linear-gradient(135deg, #1d6a44, #0f4c31);
+    transform: scale(1.05);
+}
+
+/* Disabled Button */
+.my-orders button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 🛍 Order Row Styling */
 .my-orders-order {
     display: grid;
     grid-template-columns: 60px 2fr 1fr 1fr 2fr auto;
@@ -31,7 +82,7 @@
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Image Styling */
+/* 🖼 Image Styling */
 .my-orders-order img {
     width: 55px;
     height: 55px;
@@ -45,7 +96,7 @@
     transform: scale(1.1);
 }
 
-/* Text Styling */
+/* 📌 Text Styling */
 .my-orders-order p {
     font-weight: 500;
     color: #454545;
@@ -56,31 +107,7 @@
     font-weight: bold;
 }
 
-/* Responsive Button Styling */
-.my-orders-order button {
-    border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    background: linear-gradient(135deg, #2E8B57, #1d6a44);
-    cursor: pointer;
-    color: white;
-    font-size: 14px;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 120px;
-}
-
-/* Button Hover */
-.my-orders-order button:hover {
-    background: linear-gradient(135deg, #1d6a44, #0f4c31);
-    transform: scale(1.05);
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive Design */
+/* 🎯 Responsive Design */
 @media (max-width: 900px) {
     .my-orders-order {
         grid-template-columns: 1fr 2fr 1fr;
@@ -99,5 +126,16 @@
     .my-orders-order img {
         width: 45px;
         height: 45px;
+    }
+
+    /* 📅 Adjust Date Filter Responsiveness */
+    .my-orders input[type="date"] {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+
+    .my-orders button {
+        font-size: 12px;
+        padding: 6px 10px;
     }
 }
