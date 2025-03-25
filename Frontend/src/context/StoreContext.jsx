@@ -11,9 +11,7 @@ const StoreContextProvider = (props) => {
     // state variab;e
     const [token, setToken] = useState("");
     // for food list 
-    // hello how far
     const [food_list,setFoodList] = useState([])
-    // h
     // functinality for add to cart
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
@@ -48,6 +46,7 @@ const StoreContextProvider = (props) => {
         }
         return totalAmount;
     }
+    
     // frontend par food dala load krne k liye
     const fetchFoodList = async() => {
         const response = await axios.get(url +"/api/food/list");
@@ -59,6 +58,7 @@ const StoreContextProvider = (props) => {
         const response = await axios.post(url +"/api/cart/get",{},{headers:{token}});
         setCartItems(response.data.cartData);
     }
+
 
     useEffect(()=>{
         async function loadData() {
@@ -80,7 +80,7 @@ const StoreContextProvider = (props) => {
         getTotalCartAmount,
         url, 
         token, 
-        setToken
+        setToken,
     };
 
 
