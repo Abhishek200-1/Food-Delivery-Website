@@ -1,11 +1,9 @@
 import React, { useContext, useState } from "react";
-// import { StoreContext } from "../../context/StoreContext";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Feedback.css";
 
 const Feedback = () => {
-    const { url, token, user, submitFeedback } = useContext(StoreContext);
     const { orderId } = useParams();
     const navigate = useNavigate();
 
@@ -26,7 +24,6 @@ const Feedback = () => {
         <div className="feedback-container">
             <h2>Give Feedback</h2>
             <p><b>Order ID:</b> {orderId}</p>
-            {/* <p><b>Email:</b> {user?.email || "Guest"}</p> */}
 
             <label>Rating:</label>
             <select value={rating} onChange={(e) => setRating(e.target.value)}>
