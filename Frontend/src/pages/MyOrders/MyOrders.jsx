@@ -3,15 +3,14 @@ import "./MyOrders.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import { assets } from "../../assets/assets";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const MyOrders = () => {
     const { url, token } = useContext(StoreContext);
     const [data, setData] = useState({}); // All orders grouped by date
     const [filteredData, setFilteredData] = useState({}); // Filtered orders grouped by date
     const [selectedDate, setSelectedDate] = useState(""); // Selected date for filtering
-
-    // Function to get today's date in YYYY-MM-DD format
-    const getTodayDate = () => new Date().toISOString().split("T")[0];
+    const navigate = useNavigate(); // Hook for navigation
 
     // Fetch user orders
     const fetchOrders = async () => {
@@ -19,20 +18,18 @@ const MyOrders = () => {
             const response = await axios.post(url + "/api/order/userorders", {}, { headers: { token } });
 
             if (response.data.success) {
-                // Sort orders by date (newest first)
                 const sortedOrders = response.data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-                // Group orders by date
                 const groupedOrders = sortedOrders.reduce((acc, order) => {
-                    const orderDate = new Date(order.date).toISOString().split("T")[0]; // Extract YYYY-MM-DD
+                    const orderDate = new Date(order.date).toISOString().split("T")[0];
                     if (!acc[orderDate]) acc[orderDate] = [];
                     acc[orderDate].push(order);
                     return acc;
                 }, {});
 
                 setData(groupedOrders);
-                setFilteredData(groupedOrders); // Initially show all orders
-                setSelectedDate(""); // No filter applied at the beginning
+                setFilteredData(groupedOrders);
+                setSelectedDate("");
             } else {
                 console.error("Failed to fetch orders");
             }
@@ -41,21 +38,25 @@ const MyOrders = () => {
         }
     };
 
-    // Filter orders based on selected date
+    // Filter orders by selected date
     const filterOrdersByDate = (date) => {
         setSelectedDate(date);
         if (date === "") {
-            setFilteredData(data); // Show all orders if no date is selected
+            setFilteredData(data);
         } else {
-            const filteredOrders = { [date]: data[date] || [] }; // Show only selected date's orders
-            setFilteredData(filteredOrders);
+            setFilteredData({ [date]: data[date] || [] });
         }
     };
 
-    // Reset the filter
+    // Reset the date filter
     const resetFilter = () => {
         setSelectedDate("");
         setFilteredData(data);
+    };
+
+    // Navigate to the feedback page
+    const handleGiveFeedback = (orderId) => {
+        navigate(`/feedback/${orderId}`);
     };
 
     // Fetch orders on component mount
@@ -71,15 +72,16 @@ const MyOrders = () => {
                 <h2>My Orders</h2>
 
                 {/* Date Filter */}
-                <label><b>Filter by Date:</b></label>
-                <input type="date" value={selectedDate} onChange={(e) => filterOrdersByDate(e.target.value)} />
-                <button onClick={resetFilter} disabled={!selectedDate}>Reset Date</button>
+                <div className="filter-container">
+                    <label><b>Filter by Date:</b></label>
+                    <input type="date" value={selectedDate} onChange={(e) => filterOrdersByDate(e.target.value)} />
+                    <button onClick={resetFilter} disabled={!selectedDate}>Reset Date</button>
+                </div>
 
                 <div className="container">
-                    {/* Display orders grouped by date */}
                     {Object.keys(filteredData).length > 0 ? (
                         Object.keys(filteredData)
-                            .sort((a, b) => new Date(b) - new Date(a)) // Sort dates in descending order (latest first)
+                            .sort((a, b) => new Date(b) - new Date(a))
                             .map((date, index) => (
                                 <div key={index}>
                                     <h3>{new Date(date).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</h3>
@@ -109,8 +111,11 @@ const MyOrders = () => {
                                                     <b>{order.status}</b>
                                                 </p>
 
-                                                {/* Track Order Button */}
-                                                <button onClick={fetchOrders}>Track order</button>
+                                                {/* Buttons Container */}
+                                                <div className="order-buttons">
+                                                    <button className="track-btn" onClick={fetchOrders}>Track Order</button>
+                                                    <button className="feedback-btn" onClick={() => handleGiveFeedback(order._id)}>Give Feedback</button>
+                                                </div>
                                             </div>
                                         ))
                                     ) : (
