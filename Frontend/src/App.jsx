@@ -10,6 +10,7 @@ import LoginPopUp from './components/LoginPopUp/LoginPopUp'
 import Verify from './pages/Verify/Verify'
 import MyOrders from './pages/MyOrders/MyOrders'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import Feedback from './components/Feedback/Feedback'
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/verify" element={<Verify/>} />
         <Route path="/myorders" element={<MyOrders/>} />
         <Route path="/ProfilePage" element={<ProfilePage/>} />
+        <Route path="/feedback/:orderId" element={<Feedback />} />
       </Routes>
     </div>
     <AppDownload/>
