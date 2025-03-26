@@ -126,9 +126,10 @@
     background: transparent;
     border: none;
     outline: none;
-    padding-left: 10px;
+    padding: 10px;
     font-size: 14px;
     flex: 1;
+    border-radius: 4px;
 }
 
 .cart-promocode-input button {
