@@ -11,7 +11,7 @@ const Navbar = () => {
       {/* Brand Name and Admin Panel */}
       <div className='brand-container'>
         <Link to='/'>
-          <h2 className='brand-name'>NomNomGo.</h2>
+          <img className='brand-name' src={assets.logo4} alt="" />
         </Link>
         <span className='admin-text'>Admin Panel</span>
       </div>

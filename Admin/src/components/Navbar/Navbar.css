@@ -22,10 +22,7 @@
 
 /* Main Brand Name */
 .brand-name {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: white;
-    cursor: pointer;
+    width: 210px;
     transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
@@ -51,7 +48,7 @@
     font-weight: 500;
     color: #FFD700;
     margin-top: -5px;
-    margin-left: -82px;
+    margin-left: -120px;
 }
 
 /* Profile Section */
