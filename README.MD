@@ -12,7 +12,7 @@ This is a full-stack **Food Delivery Website** built using the **MERN (MongoDB, 
 ✅ Browse restaurants and food items 🍽️  
 ✅ Add to cart and place orders 🛒  
 ✅ Real-time order tracking 📍  
-✅ Payment gateway integration 💳  
+✅ Payment gateway integration 💳   
 ✅ Admin panel for managing restaurants and orders 🛠️  
 
 ## 🛠️ Tech Stack
