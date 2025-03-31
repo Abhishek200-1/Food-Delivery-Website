@@ -1,6 +1,7 @@
 .order-section {
     padding: 20px 20px;
     text-align: center;
+    overflow: scroll;
 }
 
 /* Heading */
@@ -35,6 +36,7 @@
     flex-direction: column;
     gap: 15px;
     margin-top: 20px;
+    
 }
 
 /* No Orders Found */
