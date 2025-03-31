@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Feedback.css";
@@ -7,19 +7,46 @@ const Feedback = () => {
     const { orderId } = useParams();
     const navigate = useNavigate();
 
-    // hello
     const [rating, setRating] = useState("");
     const [comment, setComment] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!rating || !comment) {
             alert("Please provide both rating and comment.");
             return;
         }
-
-        submitFeedback(orderId, user?.email, rating, comment);
-        navigate("/"); // Redirect back to orders page
+    
+        setLoading(true);
+        setError("");
+    
+        try {
+            const token = localStorage.getItem("token"); // Get JWT token from storage
+            const response = await axios.post("http://localhost:3000/api/feedback", {
+                orderId,
+                rating,
+                comment,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Attach token to request
+                },
+            });
+    
+            if (response.status === 201) {
+                alert("Feedback submitted successfully!");
+                navigate("/");
+            } else {
+                setError("Failed to submit feedback. Please try again.");
+            }
+        } catch (err) {
+            setError("Error submitting feedback. Check your internet connection.");
+            console.error("API Error:", err);
+        } finally {
+            setLoading(false);
+        }
     };
+    
 
     return (
         <div className="feedback-container">
@@ -43,7 +70,11 @@ const Feedback = () => {
                 placeholder="Write your feedback..."
             ></textarea>
 
-            <button onClick={handleSubmit}>Submit Feedback</button>
+            {error && <p className="error-message">{error}</p>}
+
+            <button onClick={handleSubmit} disabled={loading}>
+                {loading ? "Submitting..." : "Submit Feedback"}
+            </button>
             <button onClick={() => navigate("/")}>Cancel</button>
         </div>
     );
