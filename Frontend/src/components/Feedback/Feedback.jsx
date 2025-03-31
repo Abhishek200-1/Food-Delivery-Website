@@ -7,7 +7,7 @@ const Feedback = () => {
     const { orderId } = useParams();
     const navigate = useNavigate();
 
-    const [rating, setRating] = useState("");
+    const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -46,7 +46,6 @@ const Feedback = () => {
             setLoading(false);
         }
     };
-    
 
     return (
         <div className="feedback-container">
@@ -54,14 +53,15 @@ const Feedback = () => {
             <p><b>Order ID:</b> {orderId}</p>
 
             <label>Rating:</label>
-            <select value={rating} onChange={(e) => setRating(e.target.value)}>
-                <option value="">Select Rating</option>
-                <option value="1">⭐ 1</option>
-                <option value="2">⭐⭐ 2</option>
-                <option value="3">⭐⭐⭐ 3</option>
-                <option value="4">⭐⭐⭐⭐ 4</option>
-                <option value="5">⭐⭐⭐⭐⭐ 5</option>
-            </select>
+            <input
+                type="range"
+                min="1"
+                max="5"
+                value={rating}
+                onChange={(e) => setRating(e.target.value)}
+                className="slider"
+            />
+            <p>Rating: {rating} ⭐</p>
 
             <label>Comment:</label>
             <textarea
