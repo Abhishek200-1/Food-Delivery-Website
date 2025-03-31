@@ -6,6 +6,9 @@ import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
+import feedbackRouter from "./routes/feedbackRoute.js"
+// const feedbackRoutes = require("./routes/feedbackRoutes");
+
 
 
 // Load environment variables
@@ -30,6 +33,8 @@ app.use("/images", express.static('uploads'));
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
+app.use("/api/feedback", feedbackRouter);
+app.use(cors({ origin: "*" }));
 
 
 app.get("/", (req, res) => {
