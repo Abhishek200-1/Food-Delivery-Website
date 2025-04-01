@@ -71,6 +71,73 @@ h1 {
     }
 }
 
+/* Cards Container */
+.cards-container {
+    display: flex;
+    gap: 30px;
+    margin-top: -190px;
+    margin-bottom: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Card Styling */
+.card {
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 270px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    position: relative;
+    font-family: "Poppins", sans-serif;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Count Styling */
+.count {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Specific Card Colors */
+.delivered {
+    border-top: 6px solid #2E8B57; /* Green */
+}
+
+.food-processing {
+    border-top: 6px solid #FFA500; /* Orange */
+}
+
+.out-for-delivery {
+    border-top: 6px solid #007BFF; /* Blue */
+}
+
+.complete-orders {
+    border-top: 6px solid #6C757D; /* Grey */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 90%;
+    }
+}
+
+
 /* Smooth Fade-in Animation */
 @keyframes fadeIn {
     from {
