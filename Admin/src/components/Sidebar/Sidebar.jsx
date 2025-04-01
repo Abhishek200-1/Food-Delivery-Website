@@ -27,6 +27,10 @@ const Sidebar = () => {
             <img src={assets.cart_icon} alt="" />
             <p>Update Details</p>
         </NavLink> */}
+        {/* <NavLink to='/UpdateCategory' className="sidebar-option">
+            <img src={assets.cart_icon} alt="" />
+            <p>Add New Category</p>
+        </NavLink> */}
       </div>
     </div>
   )
