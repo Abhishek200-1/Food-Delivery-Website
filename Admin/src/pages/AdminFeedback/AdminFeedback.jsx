@@ -7,6 +7,8 @@ const AdminFeedback = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [popupComment, setPopupComment] = useState("");
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -54,6 +56,34 @@ const AdminFeedback = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/api/feedback/${id}`);
+      if (response.status === 200) {
+        setFeedbacks((prevFeedbacks) =>
+          prevFeedbacks.filter((fb) => fb._id !== id)
+        );
+        toast.success("Feedback deleted successfully!"); // Show success toast
+      }
+    } catch (err) {
+      console.error("Error deleting feedback:", err);
+      toast.error("Error deleting feedback!"); // Show error toast
+    }
+  };
+
+  const handleSeeMore = (comment) => {
+    setPopupComment(comment);
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  const truncateComment = (comment) => {
+    return comment.length > 100 ? `${comment.substring(0, 100)}...` : comment;
+  };
+
   return (
     <div className="admin-feedback-container">
       <h2>Customer Feedback Management</h2>
@@ -77,7 +107,14 @@ const AdminFeedback = () => {
               <tr key={feedback._id}>
                 <td>{feedback.orderId}</td>
                 <td>{"★".repeat(feedback.rating)}</td>
-                <td>{feedback.comment}</td>
+                <td>
+                  {truncateComment(feedback.comment)}
+                  {feedback.comment.length > 100 && (
+                    <button onClick={() => handleSeeMore(feedback.comment)}>
+                      See More
+                    </button>
+                  )}
+                </td>
                 <td>{feedback.active ? "Active" : "Pending"}</td>
                 <td>
                   {!feedback.active ? (
@@ -89,11 +126,27 @@ const AdminFeedback = () => {
                       Mark as Inactive
                     </button>
                   )}
+                  <button 
+                    onClick={() => handleDelete(feedback._id)} 
+                    style={{ marginLeft: '10px', backgroundColor: '#dc3545' }}>
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      )}
+
+      {/* Popup for full comment */}
+      {isPopupOpen && (
+        <div className="popup-overlay">
+          <div className="popup-container">
+            <button className="close-btn" onClick={handleClosePopup}>X</button>
+            <h3>Full Comment</h3>
+            <p>{popupComment}</p>
+          </div>
+        </div>
       )}
     </div>
   );

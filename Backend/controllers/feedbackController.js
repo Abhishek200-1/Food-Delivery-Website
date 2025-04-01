@@ -91,3 +91,21 @@ export const deactivateFeedback = async (req, res) => {
         res.status(500).json({ message: "Error deactivating feedback" });
     }
 };
+
+export const deleteFeedback = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Find and delete the feedback by ID
+        const feedback = await Feedback.findByIdAndDelete(id);
+        if (!feedback) {
+            return res.status(404).json({ message: "Feedback not found" });
+        }
+
+        res.status(200).json({ message: "Feedback deleted successfully", feedback });
+    } catch (error) {
+        console.error("Delete Feedback Error:", error);
+        res.status(500).json({ message: "Error deleting feedback" });
+    }
+};
+

@@ -3,70 +3,94 @@
     margin: 20px auto;
     padding: 20px;
     background: #ffffff;
-    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
     border-radius: 10px;
-}
-
-.admin-feedback-container h2 {
+  }
+  
+  .admin-feedback-container h2 {
     text-align: center;
     color: #333;
     font-size: 24px;
     margin-bottom: 20px;
-}
-
-.error-message {
+  }
+  
+  .error-message {
     color: #dc3545;
     text-align: center;
     font-weight: bold;
     margin-top: 10px;
-}
-
-table {
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
     background: #f9f9f9;
     border-radius: 8px;
     overflow: hidden;
-}
-
-thead {
+  }
+  
+  thead {
     background: #50aa77;
     color: white;
-}
-
-thead th {
+  }
+  
+  thead th {
     padding: 12px;
     text-align: left;
     font-size: 16px;
-}
-
-tbody tr {
+    width: 20%;
+  }
+  
+  tbody tr {
     border-bottom: 1px solid #ddd;
     transition: background 0.3s ease;
-}
-
-tbody tr:hover {
+  }
+  
+  tbody tr:hover {
     background: #f1f1f1;
-}
-
-tbody td {
+  }
+  
+  tbody td {
     padding: 12px;
     font-size: 14px;
     color: #333;
-}
-
-tbody td:nth-child(2) {
+    text-align: left;
+  }
+  
+  tbody td:nth-child(2) {
     font-size: 18px;
     color: #ffcc00;
-}
-
-tbody td:last-child {
-    text-align: center;
-    padding-left: 20px; /* Space between Action and Status */
-}
-
-button {
+  }
+  
+  tbody td:nth-child(1) {
+    width: 20%;
+  }
+  
+  tbody td:nth-child(2) {
+    width: 15%;
+  }
+  
+  tbody td:nth-child(3) {
+    width: 35%;
+    word-wrap: break-word;
+  }
+  
+  tbody td:nth-child(4) {
+    width: 10%;
+  }
+  
+  tbody td:nth-child(5) {
+    width: 20%;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  button {
     padding: 8px 12px;
     font-size: 14px;
     color: white;
@@ -75,43 +99,102 @@ button {
     cursor: pointer;
     border-radius: 5px;
     transition: background 0.3s ease;
-    display: inline-block; /* Ensure the button is treated as an inline-block element */
-    margin-left: -40px;
-}
-
-button:hover {
+    /* display: inline-block; */
+    margin-left: 10px;
+  }
+  
+  button:hover {
     background: #218838;
-}
-
-button:disabled {
+  }
+  
+  button:disabled {
     background: #cccccc;
     cursor: not-allowed;
-}
-
-@media (max-width: 480px) {
+  }
+  
+  /* Adjust the width for action buttons */
+  tbody td button {
+    width: 130px;  /* Set the width for action buttons */
+    margin: 2px 10px;  /* Spacing between action buttons */
+  }
+  
+  /* Popup styles */
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .popup-container h3 {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .popup-container p {
+    font-size: 16px;
+    white-space: pre-line;
+    word-wrap: break-word;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  .close-btn:hover {
+    color: #dc3545;
+  }
+  
+  @media (max-width: 480px) {
     .admin-feedback-container {
-        padding: 10px;
+      padding: 10px;
     }
-
+  
     table {
-        font-size: 10px;
+      font-size: 10px;
     }
-
+  
     thead th {
-        font-size: 12px;
-        padding: 6px;
+      font-size: 12px;
+      padding: 6px;
     }
-
+  
     tbody td {
-        padding: 6px;
+      padding: 6px;
     }
-
+  
     button {
-        padding: 5px 8px;
-        font-size: 10px;
+      padding: 5px 8px;
+      font-size: 10px;
     }
-
+  
     tbody td:nth-child(2) {
-        font-size: 14px;
+      font-size: 14px;
     }
-}
+  }
+  

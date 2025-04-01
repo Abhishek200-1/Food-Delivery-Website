@@ -48,6 +48,7 @@
 .actions {
     display: flex;
     gap: 8px;
+    margin-left: -10px;
 }
 
 .edit-btn {

@@ -32,7 +32,7 @@ const Sidebar = () => {
             <p>Add New Category</p>
         </NavLink> */}
         <NavLink to='/AdminFeedback' className="sidebar-option">
-            <img src={assets.cart_icon} alt="" />
+            <img src={assets.feedback_icon} alt="" />
             <p>See Feedbacks</p>
         </NavLink>
       </div>
