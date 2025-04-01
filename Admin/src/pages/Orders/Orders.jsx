@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import './Orders.css';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import "./Orders.css";
+import { toast } from "react-toastify";
 import axios from "axios";
-import { assets } from '../../assets/assets';
+import { assets } from "../../assets/assets";
 
-const Orders = ({ url }) => {
-  const [orders, setOrders] = useState({}); // Grouped orders by date
+const Orders = ({ url, fetchOrderCounts }) => {
+  const [orders, setOrders] = useState({});
 
-  // Fetch all orders from API
+  // Fetch all orders
   const fetchAllOrders = async () => {
     try {
       const response = await axios.get(url + "/api/order/list");
       if (response.data.success) {
-        // Sort orders by date (newest first)
         const sortedOrders = response.data.data.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        // Group orders by date
         const groupedOrders = sortedOrders.reduce((acc, order) => {
-          const orderDate = new Date(order.date).toISOString().split("T")[0]; // Extract YYYY-MM-DD
+          const orderDate = new Date(order.date).toISOString().split("T")[0];
           if (!acc[orderDate]) acc[orderDate] = [];
           acc[orderDate].push(order);
           return acc;
@@ -39,8 +37,17 @@ const Orders = ({ url }) => {
         orderId,
         status: event.target.value,
       });
+
       if (response.data.success) {
-        await fetchAllOrders(); // Refresh orders
+        await fetchAllOrders();
+        
+        // Update the counts in WelcomePage after status update
+        if (typeof fetchOrderCounts === "function") {
+          await fetchOrderCounts(); // ✅ Ensure the function exists before calling
+        } else {
+          console.warn("fetchOrderCounts is not a function");
+        }
+
         toast.success("Order status updated!");
       }
     } catch (error) {
@@ -48,7 +55,6 @@ const Orders = ({ url }) => {
     }
   };
 
-  // Fetch orders on component mount
   useEffect(() => {
     fetchAllOrders();
   }, []);
@@ -60,7 +66,7 @@ const Orders = ({ url }) => {
       <div className="order-list">
         {Object.keys(orders).length > 0 ? (
           Object.keys(orders)
-            .sort((a, b) => new Date(b) - new Date(a)) // Sort dates in descending order (latest first)
+            .sort((a, b) => new Date(b) - new Date(a))
             .map((date, index) => (
               <div key={index}>
                 <h3>{new Date(date).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })}</h3>
@@ -70,29 +76,23 @@ const Orders = ({ url }) => {
                     <img src={assets.parcel_icon} alt="Parcel Icon" />
 
                     <div>
-                      {/* Order Items */}
                       <p className="order-item-food">
                         {order.items.map(item => `${item.name} X ${item.quantity}`).join(", ")}
                       </p>
 
-                      {/* Customer Name */}
                       <p className="order-item-name">{order.address.firstname} {order.address.lastname}</p>
 
-                      {/* Address */}
                       <div className="order-item-address">
                         <p>{order.address.street},</p>
                         <p>{order.address.city}, {order.address.state}, {order.address.country}, {order.address.zipcode}</p>
                       </div>
 
-                      {/* Phone Number */}
                       <p className="order-item-phone">{order.address.phone}</p>
                     </div>
 
-                    {/* Order Details */}
                     <p>Items: {order.items.length}</p>
                     <p>&#8377; {order.amount}</p>
 
-                    {/* Order Status Dropdown */}
                     <select onChange={(event) => statusHandler(event, order._id)} value={order.status}>
                       <option value="Food Processing">Food Processing</option>
                       <option value="Out For Delivery">Out For Delivery</option>
