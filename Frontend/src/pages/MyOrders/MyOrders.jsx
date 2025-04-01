@@ -91,7 +91,7 @@ const MyOrders = () => {
                                                 <img src={assets.parcel_icon} alt="Parcel Icon" />
 
                                                 {/* Order Items */}
-                                                <p>
+                                                <p className="fooditem">
                                                     {order.items.map((item, j) =>
                                                         j === order.items.length - 1
                                                             ? `${item.name} X ${item.quantity}`

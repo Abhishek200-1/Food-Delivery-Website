@@ -135,6 +135,16 @@
     transform: scale(1.05);
 }
 
+.fooditem {
+    display: block; /* Ensure the items appear in a new line */
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0; /* Provide some spacing between food items */
+    text-align: left; /* Align items to the left */
+    max-width: 350px; /* Control the width if needed */
+    word-wrap: break-word; /* Ensure text wraps within the container */
+}
+
 /* 🔥 Responsive Design */
 @media (max-width: 900px) {
     .my-orders-order {
