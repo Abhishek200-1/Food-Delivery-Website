@@ -31,6 +31,10 @@ const Sidebar = () => {
             <img src={assets.cart_icon} alt="" />
             <p>Add New Category</p>
         </NavLink> */}
+        <NavLink to='/AdminFeedback' className="sidebar-option">
+            <img src={assets.cart_icon} alt="" />
+            <p>See Feedbacks</p>
+        </NavLink>
       </div>
     </div>
   )

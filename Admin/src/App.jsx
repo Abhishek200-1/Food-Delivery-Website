@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import UpdateFoodDetails from './pages/UpdateFoodDetails/UpdateFoodDetails'
 import AddCategory from './pages/AddCategory/AddCategory'
+import AdminFeedback from './pages/AdminFeedback/AdminFeedback'
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/orders' element={<Orders url={url}/>} />
           {/* <Route path='/update' element={<UpdateFoodDetails url={url}/>} /> */}
           {/* <Route path='/UpdateCategory' element={<AddCategory url={url}/>}/> */}
+          <Route path='/AdminFeedback' element={<AdminFeedback url={url}/>}/>
         </Routes>
       </div>
     </>

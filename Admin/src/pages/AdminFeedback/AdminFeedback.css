@@ -1,0 +1,117 @@
+.admin-feedback-container {
+    width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
+    border-radius: 10px;
+}
+
+.admin-feedback-container h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background: #50aa77;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background 0.3s ease;
+}
+
+tbody tr:hover {
+    background: #f1f1f1;
+}
+
+tbody td {
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+tbody td:nth-child(2) {
+    font-size: 18px;
+    color: #ffcc00;
+}
+
+tbody td:last-child {
+    text-align: center;
+    padding-left: 20px; /* Space between Action and Status */
+}
+
+button {
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background: #28a745;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    display: inline-block; /* Ensure the button is treated as an inline-block element */
+    margin-left: -40px;
+}
+
+button:hover {
+    background: #218838;
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+    .admin-feedback-container {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 10px;
+    }
+
+    thead th {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    tbody td {
+        padding: 6px;
+    }
+
+    button {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+
+    tbody td:nth-child(2) {
+        font-size: 14px;
+    }
+}

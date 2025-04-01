@@ -15,6 +15,10 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    active: {
+        type: Boolean,
+        default: false,  // default to false if not provided
+      },
 }, { timestamps: true });
 
 const Feedback = mongoose.model("Feedback", feedbackSchema);

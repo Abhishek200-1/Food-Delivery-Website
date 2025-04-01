@@ -52,3 +52,42 @@ export const getAllFeedbacks = async (req, res) => {
         res.status(500).json({ message: "Error fetching all feedbacks" });
     }
 };
+
+// Activate Feedback
+export const activateFeedback = async (req, res) => {
+    try {
+      const { id } = req.params;
+      
+      // Find the feedback by ID and update the status
+      const feedback = await Feedback.findByIdAndUpdate(id, { active: true }, { new: true });
+  
+      if (!feedback) {
+        return res.status(404).json({ message: "Feedback not found." });
+      }
+  
+      res.status(200).json(feedback);
+    } catch (error) {
+      console.error("Activate Feedback Error:", error);
+      res.status(500).json({ message: "Error activating feedback" });
+    }
+  };
+ 
+// Deactivate Feedback
+export const deactivateFeedback = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const feedback = await Feedback.findById(id);
+        if (!feedback) {
+            return res.status(404).json({ message: "Feedback not found" });
+        }
+
+        feedback.active = false;
+        await feedback.save();
+
+        res.status(200).json({ message: "Feedback marked as inactive", feedback });
+    } catch (error) {
+        console.error("Error deactivating feedback:", error);
+        res.status(500).json({ message: "Error deactivating feedback" });
+    }
+};

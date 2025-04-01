@@ -11,7 +11,10 @@ const CustomerReview = () => {
     const fetchFeedback = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/feedback");
-        setReviews(response.data);
+        console.log(response.data);  // Log the response data to verify it
+        // Filter only active feedbacks
+        const activeFeedbacks = response.data.filter(feedback => feedback.active === true);
+        setReviews(activeFeedbacks);
       } catch (error) {
         console.error("Error fetching feedback:", error);
       } finally {
@@ -49,7 +52,10 @@ const CustomerReview = () => {
                   whileHover={{ transition: { duration: 0.2 } }}
                 >
                   <div className="review-header">
-                    <img src={`https://i.pravatar.cc/50?u=${review._id}`} alt={review.userName || "User"} />
+                    <img
+                      src={`https://i.pravatar.cc/50?u=${review._id}`}
+                      alt={review.userName || "User"}
+                    />
                     <div>
                       <h4>{review.userName || "Anonymous"}</h4>
                       <div className="stars">{"★".repeat(review.rating)}</div>
@@ -59,7 +65,7 @@ const CustomerReview = () => {
                 </motion.div>
               ))
             ) : (
-              <p>No feedback available yet.</p>
+              <p>No active feedback available yet.</p>
             )}
           </div>
         )}

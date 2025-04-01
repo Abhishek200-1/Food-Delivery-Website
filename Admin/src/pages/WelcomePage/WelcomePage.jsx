@@ -57,7 +57,7 @@ const WelcomePage = ({ url }) => {
           <span className="count">{orderCounts.Delivered}</span>
         </div>
         <div className="card complete-orders">
-          <h2>Complete Orders</h2>
+          <h2>Total Orders</h2>
           <span className="count">{orderCounts["Complete Orders"]}</span>
         </div>
       </div>
