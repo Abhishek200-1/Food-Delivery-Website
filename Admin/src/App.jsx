@@ -14,7 +14,7 @@ import AdminFeedback from './pages/AdminFeedback/AdminFeedback';
 const App = () => {
   const url = "http://localhost:3000";
 
-  // Initialize state based on localStorage to prevent flicker on reload
+
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("adminToken"));
   const [showLoginPopup, setShowLoginPopup] = useState(!localStorage.getItem("adminToken"));
 
