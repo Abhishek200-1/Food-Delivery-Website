@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminLogin from './pages/AdminLogin/AdminLogin';
 import AdminFeedback from './pages/AdminFeedback/AdminFeedback';
+import ProfileSettings from './components/ProfileSettings/ProfileSettings';
 
 const App = () => {
   const url = "http://localhost:3000";
@@ -53,6 +54,7 @@ const App = () => {
               <Route path='/list' element={<List url={url} />} />
               <Route path='/orders' element={<Orders url={url} />} />
               <Route path='/AdminFeedback' element={<AdminFeedback url={url} />} />
+              <Route path='/profile-settings' element={<ProfileSettings url={url} />} />
             </Routes>
           </div>
         </>
