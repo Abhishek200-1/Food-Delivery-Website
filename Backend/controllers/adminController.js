@@ -63,3 +63,36 @@ export const registerAdmin = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   };
+
+  export const changeAdminPassword = async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const adminId = req.admin.id; // Get admin ID from JWT
+  
+    try {
+      const admin = await Admin.findById(adminId);
+      if (!admin) {
+        return res.status(404).json({ message: 'Admin not found' });
+      }
+  
+      // Check if current password is correct
+      const isMatch = await bcrypt.compare(currentPassword, admin.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Current password is incorrect' });
+      }
+  
+      // Hash new password
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+  
+      // Update password
+      admin.password = hashedPassword;
+      await admin.save();
+  
+      res.json({ message: 'Password updated successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  };
+
+  
+
