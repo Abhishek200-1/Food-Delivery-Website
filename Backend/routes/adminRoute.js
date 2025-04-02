@@ -1,13 +1,12 @@
 // routes/adminRoute.js
 import express from 'express';
-import { loginAdmin, registerAdmin } from '../controllers/adminController.js'; // Add registerAdmin function import
+import { loginAdmin, registerAdmin, changeAdminPassword } from '../controllers/adminController.js'; // Add registerAdmin function import
+import authMiddleware from '../middleware/adminAuthMiddleware.js';
 
 const router = express.Router();
 
-// POST /login for login
 router.post('/login', loginAdmin);
-
-// POST /register for registration (ensure this route exists)
 router.post('/register', registerAdmin);
+router.post('/change-password', authMiddleware, changeAdminPassword);
 
 export default router;
