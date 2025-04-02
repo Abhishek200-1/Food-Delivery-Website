@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ onLogout }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    onLogout(); // Calls the logout function from App.jsx
+    navigate("/login");
+  };
 
   return (
     <div className='navbar'>
       {/* Brand Name and Admin Panel */}
       <div className='brand-container'>
         <Link to='/'>
-          <img className='brand-name' src={assets.logo4} alt="" />
+          <img className='brand-name' src={assets.logo4} alt="Brand Logo" />
         </Link>
         <span className='admin-text'>Admin Panel</span>
       </div>
@@ -26,7 +33,7 @@ const Navbar = () => {
         {showMenu && (
           <div className='profile-menu'>
             <p>👤 Profile Settings</p>
-            <p>🚪 Logout</p>
+            <p onClick={handleLogout}>🚪 Logout</p>
           </div>
         )}
       </div>
