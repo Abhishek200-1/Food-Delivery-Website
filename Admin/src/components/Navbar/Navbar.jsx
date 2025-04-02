@@ -32,7 +32,7 @@ const Navbar = ({ onLogout }) => {
         <img className='profile' src={assets.profile_image} alt='Profile' />
         {showMenu && (
           <div className='profile-menu'>
-            <p>👤 Profile Settings</p>
+            <p onClick={() => navigate("/profile-settings")}>👤 Profile Settings</p>
             <p onClick={handleLogout}>🚪 Logout</p>
           </div>
         )}
