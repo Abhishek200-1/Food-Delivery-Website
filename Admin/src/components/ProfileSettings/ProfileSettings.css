@@ -1,0 +1,156 @@
+/* User Profile Page Container */
+.user-profile-container {
+  width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Box */
+.user-profile-box {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Heading */
+.user-profile-heading {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Profile Content */
+.user-profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Profile Avatar */
+.user-profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #50aa77;
+  margin-bottom: 15px;
+}
+
+/* Upload Button */
+.user-profile-upload {
+  display: inline-block;
+  background: #50aa77;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: background 0.3s ease;
+}
+
+.user-profile-upload:hover {
+  background: #3d8e5e;
+}
+
+/* User Details */
+.user-profile-details {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.user-profile-details p {
+  margin: 5px 0;
+}
+
+/* Change Password Button */
+.user-profile-password-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+  margin-left: 2px;
+}
+
+.user-profile-password-btn:hover {
+  background: #0056b3;
+}
+
+/* Password Change Form */
+.user-password-change {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.user-password-change h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.user-password-input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Password Actions */
+.password-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.user-profile-cancel-btn {
+  padding: 10px 15px;
+  font-size: 14px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.user-profile-cancel-btn:hover {
+  background: #c82333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .user-profile-container {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .user-profile-avatar {
+      width: 100px;
+      height: 100px;
+  }
+
+  .user-profile-heading {
+      font-size: 20px;
+  }
+
+  .user-profile-password-btn,
+  .user-profile-cancel-btn {
+      padding: 8px 12px;
+      font-size: 12px;
+  }
+}
