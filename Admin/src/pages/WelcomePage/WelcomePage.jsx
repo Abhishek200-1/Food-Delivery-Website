@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./WelcomePage.css";
 import axios from "axios";
-import Orders from "../Orders/Orders";
+import { useNavigate } from "react-router-dom";
+import "./WelcomePage.css";
 
 const WelcomePage = ({ url }) => {
   const [orderCounts, setOrderCounts] = useState({
@@ -10,6 +10,15 @@ const WelcomePage = ({ url }) => {
     "Delivered": 0,
     "Complete Orders": 0,
   });
+  const navigate = useNavigate();
+
+  // Check if the admin is authenticated
+  useEffect(() => {
+    const token = localStorage.getItem("adminToken");
+    if (!token) {
+      navigate("/login");  // Redirect to login if no token is found
+    }
+  }, [navigate]);
 
   const fetchOrderCounts = async () => {
     try {
