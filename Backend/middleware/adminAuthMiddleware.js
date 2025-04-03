@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
 
     const verified = jwt.verify(token, process.env.JWT_SECRET); // Verify token
     req.admin = verified; // Add admin data to request
-    next(); // Continue to next middleware
+    next();
   } catch (error) {
     res.status(401).json({ message: 'Invalid Token' });
   }
