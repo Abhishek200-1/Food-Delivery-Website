@@ -94,5 +94,38 @@ export const registerAdmin = async (req, res) => {
     }
   };
 
+  export const getAdminProfile = async (req, res) => {
+    try {
+      const admin = await Admin.findById(req.admin.id).select("-password");
+      if (!admin) return res.status(404).json({ message: "Admin not found" });
   
+      res.json(admin);
+    } catch (error) {
+      res.status(500).json({ message: "Server error" });
+    }
+  };  
 
+  export const updateAdminProfile = async (req, res) => {
+    try {
+      const { firstName, lastName, dateOfJoining, email, mobileNumber, address, profilePic } = req.body;
+      const admin = await Admin.findById(req.admin.id);
+      
+      if (!admin) return res.status(404).json({ message: "Admin not found" });
+  
+      // Update fields if provided
+      admin.firstName = firstName || admin.firstName;
+      admin.lastName = lastName || admin.lastName;
+      admin.dateOfJoining = dateOfJoining || admin.dateOfJoining;
+      admin.email = email || admin.email;
+      admin.mobileNumber = mobileNumber || admin.mobileNumber;
+      admin.address = address || admin.address;
+      admin.profilePic = profilePic || admin.profilePic;
+  
+      await admin.save();
+      res.json({ message: "Profile updated successfully", admin });
+    } catch (error) {
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+
+  
