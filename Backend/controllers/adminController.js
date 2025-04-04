@@ -99,11 +99,22 @@ export const registerAdmin = async (req, res) => {
       const admin = await Admin.findById(req.admin.id).select("-password");
       if (!admin) return res.status(404).json({ message: "Admin not found" });
   
-      res.json(admin);
+      res.json({
+        firstName: admin.firstName || "",
+        lastName: admin.lastName || "",
+        dateOfJoining: admin.dateOfJoining
+          ? admin.dateOfJoining.toISOString().split("T")[0]
+          : "",
+        email: admin.email || "",
+        mobileNumber: admin.mobileNumber || "",
+        address: admin.address || "",
+      });
     } catch (error) {
+      console.error("Error fetching admin details:", error);
       res.status(500).json({ message: "Server error" });
     }
   };  
+    
 
   export const updateAdminProfile = async (req, res) => {
     try {
