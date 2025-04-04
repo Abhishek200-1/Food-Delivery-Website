@@ -45,7 +45,7 @@ const ProfileForm = () => {
   return (
     <div className="profile-form">
       <div className="add-image-upload flex-col">
-        <img src={assets.default_profile_icon} alt="Profile" />
+        <img src={assets.profile_icon} alt="Profile" />
       </div>
 
       <form className="form-container" onSubmit={onSubmitHandler}>
@@ -66,13 +66,13 @@ const ProfileForm = () => {
         <label>Phone</label>
         <input type="number" name="phone" value={user.phone} onChange={onChangeHandler} />
 
-        <label>Gender</label>
+        {/* <label>Gender</label>
         <select name="gender" value={user.gender} onChange={onChangeHandler}>
           <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="other">Other</option>
-        </select>
+        </select> */}
 
         <button className="update-btn" type="submit">Update Changes</button>
       </form>
