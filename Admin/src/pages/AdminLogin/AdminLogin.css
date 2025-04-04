@@ -1,3 +1,12 @@
+/* General Styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Popup Overlay (Blurred Background) */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -5,68 +14,202 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
 }
 
+/* Auth Popup (Glassmorphism Effect) */
 .auth-popup {
-  background: white;
-  padding: 20px;
-  width: 350px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  width: 410px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.4s ease-in-out;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Food-Themed Header */
 .auth-popup h2 {
-  margin-bottom: 15px;
+  color: #28a745;  /* Fresh green */
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  position: relative;
+  margin-bottom: 40px;
 }
 
+/* Animated Underline */
+.auth-popup h2::after {
+  content: "";
+  width: 50px;
+  height: 4px;
+  background: #28a745;
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  transition: width 0.3s ease-in-out;
+}
+
+.auth-popup h2:hover::after {
+  width: 80px;
+}
+
+/* Input Fields */
 .input-group {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   text-align: left;
+  position: relative;
 }
 
 .input-group label {
   display: block;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
   margin-bottom: 5px;
+  opacity: 0.9;
 }
 
 .input-group input {
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transition: 0.3s;
+  outline: none;
 }
 
+/* Placeholder Text Styling */
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Input Focus Effect */
+.input-group input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+/* Submit Button */
+/* Adjusted Button */
 button {
-  width: 100%;
-  padding: 10px;
-  background: #2E8B57;
+  width: 95%; /* Adjust width slightly */
+  padding: 16px; /* Bigger button */
+  font-size: 1.1rem; /* Increase font size */
   color: white;
+  background: linear-gradient(135deg, #28a745, #218838);
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+  font-weight: bold;
+  box-shadow: 0px 4px 12px rgba(40, 167, 69, 0.5);
+  display: block;
+  position: relative;
+  left: -2px; /* Moves button to the left */
 }
 
+/* Button Hover Effect */
 button:hover {
-  background: #1d6a44;
+  background: linear-gradient(135deg, #218838, #1e7e34);
+  transform: translateX(-3px) scale(1.05); /* Moves slightly left on hover */
 }
 
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Align button slightly left */
+  padding-left: 10px; /* Adjust as needed */
+}
+
+/* Error Message */
 .error-message {
-  color: red;
+  color: #ffcccc;
+  font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
+/* Toggle Link */
 .toggle-link {
-  color: blue;
-  cursor: pointer;
   margin-top: 10px;
+  font-size: 0.95rem;
+  color: #28a745;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
 .toggle-link:hover {
   text-decoration: underline;
+}
+
+/* Decorative Food Icon */
+.auth-popup::before {
+  content: "🥗";
+  font-size: 2.5rem;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: bounce 1s infinite alternate ease-in-out;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Responsive Design */
+@media (max-width: 420px) {
+  .auth-popup {
+      width: 90%;
+      padding: 1.5rem;
+  }
+
+  .auth-popup h2 {
+      font-size: 1.5rem;
+  }
+}
+
+/* Smooth Fade-In Animation */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Bouncing Icon Animation */
+@keyframes bounce {
+  from {
+      transform: translateX(-50%) translateY(0);
+  }
+  to {
+      transform: translateX(-50%) translateY(-5px);
+  }
 }
