@@ -2,6 +2,7 @@ import express from "express";
 import { loginAdmin, registerAdmin, getAdminProfile, changeAdminPassword } from "../controllers/adminController.js";
 import authMiddleware from "../middleware/adminAuthMiddleware.js";
 
+//admin route
 const router = express.Router();
 
 router.post("/register", registerAdmin);
