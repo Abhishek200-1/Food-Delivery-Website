@@ -47,6 +47,7 @@ export const getAdminProfile = async (req, res) => {
   }
 };
 
+
 export const changeAdminPassword = async (req, res) => {
   const { currentPassword, newPassword } = req.body;
   const adminId = req.admin.id;
