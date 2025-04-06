@@ -81,5 +81,26 @@ const getUserProfile = async (req, res) => {
     }
 };
 
+//for updation of data
+const updateUserProfile = async (req, res) => {
+    const { firstName, lastName, dateOfBirth, phoneNumber, gender } = req.body;
+    try {
+        const updatedUser = await userModel.findByIdAndUpdate(
+            req.body.userId,
+            { firstName, lastName, dateOfBirth, phoneNumber, gender },
+            { new: true, select: "-password" }
+        );
 
-export { loginUser, registerUser, getUserProfile };
+        if (!updatedUser) {
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        res.json({ success: true, user: updatedUser });
+    } catch (error) {
+        console.log("Profile update error:", error);
+        res.json({ success: false, message: "Failed to update profile" });
+    }
+};
+
+
+export { loginUser, registerUser, getUserProfile, updateUserProfile };
