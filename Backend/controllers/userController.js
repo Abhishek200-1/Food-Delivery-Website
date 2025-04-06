@@ -102,5 +102,28 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
+// reset password
+const resetPassword = async (req, res) => {
+    const { email, newPassword } = req.body;
 
-export { loginUser, registerUser, getUserProfile, updateUserProfile };
+    try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.json({ success: false, message: "Email not found" });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+        user.password = hashedPassword;
+        await user.save();
+
+        res.json({ success: true, message: "Password reset successful" });
+    } catch (error) {
+        console.log("Reset Password Error:", error);
+        res.json({ success: false, message: "Something went wrong" });
+    }
+};
+
+
+export { loginUser, registerUser, getUserProfile, updateUserProfile, resetPassword };

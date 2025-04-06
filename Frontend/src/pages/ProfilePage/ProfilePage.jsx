@@ -39,10 +39,10 @@ const ProfilePage = () => {
             <img src={assets.order_icon} alt="Order Icon" />
             <p>My Orders</p>
           </div>
-          <div className="profile-page-left-option" onClick={() => setActiveSection("address")}>
+          {/* <div className="profile-page-left-option" onClick={() => setActiveSection("address")}>
             <img src={assets.address_icon} alt="Address Icon" />
             <p>Manage Address</p>
-          </div>
+          </div> */}
           <div className="profile-page-left-option" onClick={() => setActiveSection("password")}>
             <img src={assets.password_icon} alt="Password Icon" />
             <p>Password Manager</p>

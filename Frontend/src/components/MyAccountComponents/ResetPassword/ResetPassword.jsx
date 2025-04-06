@@ -1,20 +1,33 @@
-import React, { useState } from "react";
-import "./ResetPassword.css"; // Import CSS file
+import React, { useContext, useState } from "react";
+import "./ResetPassword.css";
+import { StoreContext } from "../../../context/StoreContext"; // Replace with your actual context path
+import axios from "axios";
 
 const ResetPassword = () => {
-  const existingEmail = "user@example.com"; // Dummy email for verification
   const [email, setEmail] = useState("");
   const [passwords, setPasswords] = useState({ new: "", confirm: "" });
   const [step, setStep] = useState(1);
   const [error, setError] = useState("");
-  const [passwordStrength, setPasswordStrength] = useState(0); // Strength level (0-3)
+  const [passwordStrength, setPasswordStrength] = useState(0); // 0-3
 
-  const handleEmailSubmit = () => {
-    if (email === existingEmail) {
-      setStep(2);
+  const handleEmailSubmit = async () => {
+    if (!email) {
+      setError("Please enter an email.");
+      return;
+    }
+
+    // Basic client-side validation (optional)
+    if (!email.includes("@") || !email.includes(".")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    try {
+      // Optional: Verify if email exists (you can implement backend API for that)
       setError("");
-    } else {
-      setError("Email not found! Please enter a valid email.");
+      setStep(2);
+    } catch (err) {
+      setError("Something went wrong while verifying email.");
     }
   };
 
@@ -25,11 +38,11 @@ const ResetPassword = () => {
     // Check password strength
     if (name === "new") {
       let strength = 0;
-      if (value.length >= 6) strength++; // Minimum length
-      if (value.match(/[A-Z]/)) strength++; // Uppercase letter
-      if (value.match(/[0-9]/)) strength++; // Number
-      if (value.match(/[^A-Za-z0-9]/)) strength++; // Special character
-      setPasswordStrength(strength);
+      if (value.length >= 6) strength++;
+      if (/[A-Z]/.test(value)) strength++;
+      if (/[0-9]/.test(value)) strength++;
+      if (/[^A-Za-z0-9]/.test(value)) strength++;
+      setPasswordStrength(strength > 3 ? 3 : strength);
     }
   };
 
@@ -40,20 +53,35 @@ const ResetPassword = () => {
     return "Strong";
   };
 
-  const handleResetPassword = () => {
+  const handleResetPassword = async () => {
     if (passwords.new !== passwords.confirm) {
       setError("Passwords do not match!");
       return;
     }
 
-    // Reset all fields after successful password reset
-    setEmail("");
-    setPasswords({ new: "", confirm: "" });
-    setPasswordStrength(0);
-    setStep(1);
-    setError("");
+    try {
+      const response = await fetch("http://localhost:3000/api/user/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, newPassword: passwords.new }),
+      });
 
-    alert("Password reset successfully!");
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Password reset successfully!");
+        setEmail("");
+        setPasswords({ new: "", confirm: "" });
+        setPasswordStrength(0);
+        setStep(1);
+        setError("");
+      } else {
+        setError(data.message || "Failed to reset password.");
+      }
+    } catch (error) {
+      console.error("Reset error:", error);
+      setError("Something went wrong. Please try again later.");
+    }
   };
 
   return (
@@ -61,24 +89,26 @@ const ResetPassword = () => {
       <h2>Reset Password</h2>
 
       {step === 1 ? (
-        <div>
+        <div className="step">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
+            className="input"
           />
           {error && <p className="error-message">{error}</p>}
-          <button onClick={handleEmailSubmit}>Verify Email</button>
+          <button onClick={handleEmailSubmit} className="btn">Verify Email</button>
         </div>
       ) : (
-        <div>
+        <div className="step">
           <input
             type="password"
             name="new"
             value={passwords.new}
             onChange={handlePasswordChange}
             placeholder="New Password"
+            className="input"
           />
 
           {/* Password Strength Bar */}
@@ -97,10 +127,15 @@ const ResetPassword = () => {
             value={passwords.confirm}
             onChange={handlePasswordChange}
             placeholder="Confirm New Password"
+            className="input"
           />
 
           {error && <p className="error-message">{error}</p>}
-          <button onClick={handleResetPassword}>Reset Password</button>
+
+          <div className="button-group">
+  <button onClick={handleResetPassword}>Reset Password</button>
+  <button onClick={() => setPasswords({ new: "", confirm: "" })}>Reset Form</button>
+</div>
         </div>
       )}
     </div>
