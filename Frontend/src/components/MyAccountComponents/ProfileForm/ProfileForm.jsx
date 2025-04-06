@@ -11,8 +11,9 @@ const ProfileForm = () => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
     gender: "",
+    dateOfBirth: "",
   });
 
   useEffect(() => {
@@ -38,6 +39,21 @@ const ProfileForm = () => {
     }
   }, [token]);
 
+  const isValidPhoneNumber = (number) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(number);
+  };
+
+  const isValidDOB = (dob) => {
+    const dobDate = new Date(dob);
+    const today = new Date();
+    const age = today.getFullYear() - dobDate.getFullYear();
+    const monthDiff = today.getMonth() - dobDate.getMonth();
+    const dayDiff = today.getDate() - dobDate.getDate();
+
+    return age > 18 || (age === 18 && (monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0)));
+  };
+
   const onChangeHandler = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
@@ -45,8 +61,16 @@ const ProfileForm = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
+    if (user.phoneNumber && !isValidPhoneNumber(user.phoneNumber)) {
+      return alert("Phone number must be 10 digits.");
+    }
+
+    if (user.dateOfBirth && !isValidDOB(user.dateOfBirth)) {
+      return alert("You must be at least 18 years old.");
+    }
+
     try {
-      const response = await axios.put(`${url}/api/user/profile`, user, {
+      const response = await axios.put(`${url}/api/user/update`, user, {
         headers: { token },
       });
 
@@ -93,6 +117,35 @@ const ProfileForm = () => {
 
         <label>Email</label>
         <input type="email" name="email" value={user.email} readOnly />
+
+        <label>Phone Number</label>
+        <input
+          type="tel"
+          name="phoneNumber"
+          value={user.phoneNumber}
+          onChange={onChangeHandler}
+          placeholder="Enter 10-digit phone number"
+        />
+
+        <div className="input-group">
+          <label>Gender</label>
+          <select name="gender" value={user.gender} onChange={onChangeHandler} required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div className="input-group dob-group">
+          <label>Date of Birth</label>
+          <input
+            type="date"
+            name="dateOfBirth"
+            value={user.dateOfBirth}
+            onChange={onChangeHandler}
+          />
+        </div>
 
         <button className="update-btn" type="submit">
           Update Changes

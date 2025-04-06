@@ -1,23 +1,22 @@
+/* Container for Profile Form */
 .profile-form {
     background: white;
     padding: 30px;
     border-radius: 8px;
-    /* box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); */
     width: 100%;
-    /* max-width: 800px; */
     margin-top: -20px;
-}
-
-/* Profile Picture Upload */
-.add-image-upload {
+  }
+  
+  /* Profile Picture Upload */
+  .add-image-upload {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
-}
-
-.upload-label {
+  }
+  
+  .upload-label {
     cursor: pointer;
     display: inline-block;
     width: 80px;
@@ -27,45 +26,48 @@
     border: 3px solid #2E8B57;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-}
-
-.upload-label img {
+  }
+  
+  .upload-label img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-}
-
-.upload-label:hover {
+  }
+  
+  .upload-label:hover {
     transform: scale(1.1);
-}
-
-/* Form Fields */
-.form-container {
+  }
+  
+  /* Form Layout */
+  .form-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
-
-/* First & Last Name in Same Row */
-.input-row {
+  }
+  
+  /* Grouped Inputs (First & Last Name) */
+  .input-row {
     display: flex;
     gap: 20px;
     align-items: center;
     flex-wrap: wrap;
-}
-
-/* Gender & Button in Same Row */
-.input-group {
+  }
+  
+  /* Grouping Each Field */
+  .input-group {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 5px;
-}
-
-/* Input Fields */
-.input-group input,
-.input-group select {
+  }
+  
+  /* Input & Select Field Styling */
+  .input-group input,
+  .input-group select,
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -73,38 +75,27 @@
     font-size: 0.95rem;
     transition: all 0.3s ease-in-out;
     background: #f9f9f9;
-}
-
-/* Email & Phone Fields (Adding Same Styling) */
-input[type="email"], 
-input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: .95rem;
-    transition: all 0.3s ease-in-out;
-    background: #f9f9f9;
-}
-
-/* Focus Effect for All Inputs */
-input:focus,
-select:focus {
+  }
+  
+  /* Label Styling */
+  .input-group label,
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #444;
+  }
+  
+  /* Focus Effect */
+  input:focus,
+  select:focus {
     border-color: #2E8B57;
     background: white;
     box-shadow: 0px 0px 5px rgba(46, 139, 87, 0.2);
     outline: none;
-}
-
-/* Labels */
-.input-group label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #444;
-}
-
-/* Update Button */
-.update-btn {
+  }
+  
+  /* Update Button Styling */
+  .update-btn {
     border: none;
     background: #2E8B57;
     color: white;
@@ -117,21 +108,62 @@ select:focus {
     width: max(15vw, 200px);
     text-align: center;
     margin-top: 22px;
-}
-
-.update-btn:hover {
+  }
+  
+  .update-btn:hover {
     background: #1d6e43;
     transform: scale(1.05);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
+  }
+  
+  /* Gender Select Field Styling */
+  .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23333' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px 16px;
+  }
+  
+  .input-group select:focus {
+    border-color: #2E8B57;
+    background: white;
+    box-shadow: 0px 0px 5px rgba(46, 139, 87, 0.2);
+    outline: none;
+  }
+  
+  /* Date of Birth Field Styling */
+  .dob-group input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .dob-group input[type="date"]:focus {
+    border-color: #2E8B57;
+    background: white;
+    box-shadow: 0px 0px 5px rgba(46, 139, 87, 0.2);
+    outline: none;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
     .input-row {
-        flex-direction: column;
-        gap: 10px;
+      flex-direction: column;
+      gap: 10px;
     }
-
+  
     .update-btn {
-        width: 100%;
+      width: 100%;
     }
-}
+  }
+  

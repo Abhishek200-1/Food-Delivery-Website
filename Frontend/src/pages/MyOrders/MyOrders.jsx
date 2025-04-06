@@ -3,16 +3,15 @@ import "./MyOrders.css";
 import { StoreContext } from "../../context/StoreContext";
 import axios from "axios";
 import { assets } from "../../assets/assets";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 
 const MyOrders = () => {
     const { url, token } = useContext(StoreContext);
-    const [data, setData] = useState({}); // All orders grouped by date
-    const [filteredData, setFilteredData] = useState({}); // Filtered orders grouped by date
-    const [selectedDate, setSelectedDate] = useState(""); // Selected date for filtering
-    const navigate = useNavigate(); // Hook for navigation
+    const [data, setData] = useState({});
+    const [filteredData, setFilteredData] = useState({});
+    const [selectedDate, setSelectedDate] = useState("");
+    const navigate = useNavigate();
 
-    // Fetch user orders
     const fetchOrders = async () => {
         try {
             const response = await axios.post(url + "/api/order/userorders", {}, { headers: { token } });
@@ -38,7 +37,6 @@ const MyOrders = () => {
         }
     };
 
-    // Filter orders by selected date
     const filterOrdersByDate = (date) => {
         setSelectedDate(date);
         if (date === "") {
@@ -48,18 +46,15 @@ const MyOrders = () => {
         }
     };
 
-    // Reset the date filter
     const resetFilter = () => {
         setSelectedDate("");
         setFilteredData(data);
     };
 
-    // Navigate to the feedback page
     const handleGiveFeedback = (orderId) => {
         navigate(`/feedback/${orderId}`);
     };
 
-    // Fetch orders on component mount
     useEffect(() => {
         if (token) {
             fetchOrders();
@@ -74,8 +69,14 @@ const MyOrders = () => {
                 {/* Date Filter */}
                 <div className="filter-container">
                     <label><b>Filter by Date:</b></label>
-                    <input type="date" value={selectedDate} onChange={(e) => filterOrdersByDate(e.target.value)} />
-                    <button onClick={resetFilter} disabled={!selectedDate}>Reset Date</button>
+                    <input 
+                        type="date"
+                        value={selectedDate}
+                        onChange={(e) => filterOrdersByDate(e.target.value)}
+                    />
+                    <button onClick={resetFilter} disabled={!selectedDate}>
+                        Reset Date
+                    </button>
                 </div>
 
                 <div className="container">
@@ -89,8 +90,6 @@ const MyOrders = () => {
                                         filteredData[date].map((order, i) => (
                                             <div key={i} className="my-orders-order">
                                                 <img src={assets.parcel_icon} alt="Parcel Icon" />
-
-                                                {/* Order Items */}
                                                 <p className="fooditem">
                                                     {order.items.map((item, j) =>
                                                         j === order.items.length - 1
@@ -98,20 +97,12 @@ const MyOrders = () => {
                                                             : `${item.name} X ${item.quantity}, `
                                                     )}
                                                 </p>
-
-                                                {/* Order Amount */}
                                                 <p>&#8377; {order.amount}.00</p>
-
-                                                {/* Number of Items */}
                                                 <p>Items: {order.items.length}</p>
-
-                                                {/* Order Status */}
                                                 <p>
                                                     <span>&#x25cf; </span>
                                                     <b>{order.status}</b>
                                                 </p>
-
-                                                {/* Buttons Container */}
                                                 <div className="order-buttons">
                                                     <button className="track-btn" onClick={fetchOrders}>Track Order</button>
                                                     <button className="feedback-btn" onClick={() => handleGiveFeedback(order._id)}>Give Feedback</button>
