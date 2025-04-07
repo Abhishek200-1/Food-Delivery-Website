@@ -35,6 +35,10 @@ const Sidebar = () => {
             <img src={assets.feedback_icon} alt="" />
             <p>See Feedbacks</p>
         </NavLink>
+        <NavLink to='/promocodes' className="sidebar-option">
+            <img src={assets.feedback_icon} alt="" />
+            <p>PromoCode</p>
+        </NavLink>
       </div>
     </div>
   )
