@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
 import "./PromoCode.css";
 
 const PromoCodeForm = () => {
@@ -14,6 +15,8 @@ const PromoCodeForm = () => {
     isActive: true,
   });
 
+  const [promoCodes, setPromoCodes] = useState([]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -22,123 +25,181 @@ const PromoCodeForm = () => {
     }));
   };
 
+  const fetchPromoCodes = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/api/promocodes");
+      setPromoCodes(res.data.promos || []);
+    } catch (err) {
+      console.error("Error fetching promo codes:", err.message);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:3000/api/promocodes/create", form);
-      alert("Promo code created successfully!");
+      Swal.fire("Success", "Promo code created successfully!", "success");
+      setForm({
+        code: "",
+        discountType: "percentage",
+        discountValue: "",
+        minOrderAmount: "",
+        maxDiscountAmount: "",
+        expiryDate: "",
+        usageLimit: 1,
+        isActive: true,
+      });
+      fetchPromoCodes();
     } catch (error) {
-      alert(error.response?.data?.message || "Failed to create promo code.");
+      Swal.fire("Error", error.response?.data?.message || "Failed to create promo code.", "error");
     }
   };
 
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await axios.delete(`http://localhost:3000/api/promocodes/${id}`);
+        fetchPromoCodes();
+        Swal.fire("Deleted!", "Promo code has been deleted.", "success");
+      } catch (err) {
+        Swal.fire("Error", "Error deleting promo code.", "error");
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchPromoCodes();
+  }, []);
+
   return (
-    <form className="promo-form" onSubmit={handleSubmit}>
-      <h2>Create Promo Code</h2>
+    <div className="promo-container">
+      <div className="promo-wrapper" style={{ display: "flex", gap: "30px" }}>
+        {/* Promo Form */}
+        <form className="promo-form" onSubmit={handleSubmit}>
+          <h2>Create Promo Code</h2>
 
-      <div className="form-group">
-        <label htmlFor="code">Promo Code</label>
-        <input
-          id="code"
-          name="code"
-          placeholder="Enter promo code"
-          value={form.code}
-          onChange={handleChange}
-          required
-        />
-      </div>
+          <div className="form-group">
+            <label>Promo Code</label>
+            <input
+              name="code"
+              value={form.code}
+              onChange={handleChange}
+              required
+              placeholder="e.g. SAVE10"
+            />
+          </div>
 
-      <div className="form-group">
-        <label htmlFor="discountType">Discount Type</label>
-        <select
-          id="discountType"
-          name="discountType"
-          value={form.discountType}
-          onChange={handleChange}
-        >
-          <option value="percentage">Percentage</option>
-          <option value="fixed">Fixed</option>
-        </select>
-      </div>
+          <div className="form-group">
+            <label>Discount Type</label>
+            <select name="discountType" value={form.discountType} onChange={handleChange}>
+              <option value="percentage">Percentage</option>
+              <option value="fixed">Fixed</option>
+            </select>
+          </div>
 
-      <div className="input-row">
-        <div className="form-group">
-          <label htmlFor="discountValue">Discount Value</label>
-          <input
-            id="discountValue"
-            name="discountValue"
-            type="number"
-            placeholder="e.g. 20"
-            value={form.discountValue}
-            onChange={handleChange}
-            required
-          />
+          <div className="input-row">
+            <div className="form-group">
+              <label>Discount Value</label>
+              <input
+                name="discountValue"
+                type="number"
+                value={form.discountValue}
+                onChange={handleChange}
+                required
+                placeholder="e.g. 10 (10% or ₹10)"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Min Order Amount</label>
+              <input
+                name="minOrderAmount"
+                type="number"
+                value={form.minOrderAmount}
+                onChange={handleChange}
+                placeholder="e.g. 500"
+              />
+            </div>
+          </div>
+
+          <div className="input-row">
+            <div className="form-group">
+              <label>Max Discount Amount</label>
+              <input
+                name="maxDiscountAmount"
+                type="number"
+                value={form.maxDiscountAmount}
+                onChange={handleChange}
+                placeholder="e.g. 100"
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Usage Limit</label>
+              <input
+                name="usageLimit"
+                type="number"
+                value={form.usageLimit}
+                onChange={handleChange}
+                placeholder="e.g. 1"
+              />
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Expiry Date</label>
+            <input
+              name="expiryDate"
+              type="date"
+              value={form.expiryDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group checkbox-group">
+            <input
+              name="isActive"
+              type="checkbox"
+              checked={form.isActive}
+              onChange={handleChange}
+            />
+            <label>Active</label>
+          </div>
+
+          <button type="submit">Create</button>
+        </form>
+
+        {/* Promo List */}
+        <div className="promo-list">
+          <h3>All Promo Codes</h3>
+          {promoCodes.length === 0 ? (
+            <p>No promo codes available.</p>
+          ) : (
+            <ul>
+              {promoCodes.map((promo) => (
+                <li key={promo._id}>
+                  <strong>{promo.code}</strong> -{" "}
+                  {promo.discountType === "percentage"
+                    ? `${promo.discountValue}%`
+                    : `₹${promo.discountValue}`}{" "}
+                  off
+                  <button onClick={() => handleDelete(promo._id)}>Delete</button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-
-        <div className="form-group">
-          <label htmlFor="minOrderAmount">Min Order Amount</label>
-          <input
-            id="minOrderAmount"
-            name="minOrderAmount"
-            type="number"
-            placeholder="e.g. 200"
-            value={form.minOrderAmount}
-            onChange={handleChange}
-          />
-        </div>
       </div>
-
-      <div className="input-row">
-        <div className="form-group">
-          <label htmlFor="maxDiscountAmount">Max Discount Amount</label>
-          <input
-            id="maxDiscountAmount"
-            name="maxDiscountAmount"
-            type="number"
-            placeholder="e.g. 100"
-            value={form.maxDiscountAmount}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="usageLimit">Usage Limit</label>
-          <input
-            id="usageLimit"
-            name="usageLimit"
-            type="number"
-            placeholder="e.g. 5"
-            value={form.usageLimit}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="expiryDate">Expiry Date</label>
-        <input
-          id="expiryDate"
-          name="expiryDate"
-          type="date"
-          value={form.expiryDate}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="form-group checkbox-group">
-        <input
-          id="isActive"
-          name="isActive"
-          type="checkbox"
-          checked={form.isActive}
-          onChange={handleChange}
-        />
-        <label htmlFor="isActive">Active</label>
-      </div>
-
-      <button type="submit">Create</button>
-    </form>
+    </div>
   );
 };
 

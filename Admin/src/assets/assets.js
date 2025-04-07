@@ -8,6 +8,7 @@ import home_icon from './home_icon.png'
 import cart_icon from './cart_icon.png'
 import logo4 from './logo4.png'
 import feedback_icon from './feedback_icon.png'
+import promo_icon from './promo_icon.png'
 
 export const assets ={
     logo,
@@ -19,7 +20,8 @@ export const assets ={
     home_icon,
     cart_icon,
     logo4,
-    feedback_icon
+    feedback_icon,
+    promo_icon
 }
 
 export const url = 'http://localhost:3000'

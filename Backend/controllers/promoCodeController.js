@@ -45,3 +45,20 @@ export const validatePromoCode = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+// Delete promo code by ID
+export const deletePromoCode = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const promo = await PromoCode.findByIdAndDelete(id);
+
+    if (!promo) {
+      return res.status(404).json({ success: false, message: "Promo code not found" });
+    }
+
+    res.json({ success: true, message: "Promo code deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
