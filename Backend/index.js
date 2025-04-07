@@ -8,6 +8,7 @@ import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 import feedbackRouter from "./routes/feedbackRoute.js"
 import adminRouter from "./routes/adminRoute.js"
+import promoCodeRouter from "./routes/promoCodeRoutes.js";
 
 
 
@@ -35,6 +36,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/feedback", feedbackRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/promocodes", promoCodeRouter);
 // app.use(cors({ origin: "*" }));
 
 
