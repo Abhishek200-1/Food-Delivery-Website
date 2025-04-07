@@ -153,6 +153,27 @@
     transform: scale(1.1);
 }
 
+.popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1c682e;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 999;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; bottom: 10px; }
+    to { opacity: 1; bottom: 20px; }
+  }
+  
+
 /* Ensure Responsive Consistency */
 @media (max-width: 768px) {
     .food-item {
