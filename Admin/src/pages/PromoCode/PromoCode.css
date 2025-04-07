@@ -1,0 +1,66 @@
+.promo-form {
+  width: 1050px;
+  margin: 40px auto;
+  padding: 24px;
+  /* border: 1px solid #ddd; */
+  border-radius: 12px;
+  /* background-color: #f9f9f9; */
+  font-family: Arial, sans-serif;
+  margin-top: 5px;
+}
+
+.promo-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.input-row {
+  display: flex;
+  gap: 16px;
+}
+
+.input-row .form-group {
+  flex: 1;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.promo-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.promo-form button:hover {
+  background-color: #218838;
+}
+
