@@ -62,3 +62,18 @@ export const deletePromoCode = async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+// Toggle active status
+export const togglePromoStatus = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const promo = await PromoCode.findById(id);
+    if (!promo) return res.status(404).json({ message: "Promo code not found" });
+
+    promo.isActive = !promo.isActive;
+    await promo.save();
+    res.status(200).json({ message: "Promo code status updated", promo });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to toggle promo status" });
+  }
+};

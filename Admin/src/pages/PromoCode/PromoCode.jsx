@@ -75,6 +75,33 @@ const PromoCodeForm = () => {
     }
   };
 
+  const handleToggleStatus = async (id, currentStatus) => {
+    try {
+      await axios.put(`http://localhost:3000/api/promocodes/${id}/toggle`);
+      fetchPromoCodes();
+  
+      if (!currentStatus) {
+        // Was inactive, now activated
+        Swal.fire({
+          title: "Activated!",
+          text: "Promo code is now Active.",
+          icon: "success",
+          confirmButtonColor: "#28a745", // Green
+        });
+      } else {
+        // Was active, now inactivated
+        Swal.fire({
+          title: "Inactivated!",
+          text: "Promo code is now Inactive.",
+          icon: "warning",
+          confirmButtonColor: "#dc3545", // Red
+        });
+      }
+    } catch (err) {
+      Swal.fire("Error", "Failed to update promo code status.", "error");
+    }
+  };
+
   useEffect(() => {
     fetchPromoCodes();
   }, []);
@@ -186,13 +213,30 @@ const PromoCodeForm = () => {
           ) : (
             <ul>
               {promoCodes.map((promo) => (
-                <li key={promo._id}>
-                  <strong>{promo.code}</strong> -{" "}
-                  {promo.discountType === "percentage"
-                    ? `${promo.discountValue}%`
-                    : `₹${promo.discountValue}`}{" "}
-                  off
-                  <button onClick={() => handleDelete(promo._id)}>Delete</button>
+                <li key={promo._id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+                  <div>
+                    <strong>{promo.code}</strong> -{" "}
+                    {promo.discountType === "percentage"
+                      ? `${promo.discountValue}%`
+                      : `₹${promo.discountValue}`}{" "}
+                    off
+                  </div>
+                  <div style={{ display: "flex", gap: "10px" }}>
+                    <button onClick={() => handleDelete(promo._id)}>Delete</button>
+                    <button
+                      style={{
+                        backgroundColor: promo.isActive ? "#dc3545" : "#28a745",
+                        color: "white",
+                        border: "none",
+                        padding: "4px 10px",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleToggleStatus(promo._id, promo.isActive)}
+                    >
+                      {promo.isActive ? "Inactivate" : "Activate"}
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
