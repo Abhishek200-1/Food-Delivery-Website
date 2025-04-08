@@ -12,6 +12,7 @@ import AdminLogin from './pages/AdminLogin/AdminLogin';
 import AdminFeedback from './pages/AdminFeedback/AdminFeedback';
 import ProfileSettings from './components/ProfileSettings/ProfileSettings';
 import PromoCode from './pages/PromoCode/PromoCode';
+import DailySalesSummary from './pages/DailySalesSummary/DailySalesSummary';
 
 const App = () => {
   const url = "http://localhost:3000";
@@ -57,6 +58,7 @@ const App = () => {
               <Route path='/AdminFeedback' element={<AdminFeedback url={url} />} />
               <Route path='/profile-settings' element={<ProfileSettings url={url} />} />
               <Route path='/promocodes' element={<PromoCode url={url} />} />
+              <Route path='/daily-sales-summery' element={<DailySalesSummary url={url} />} />
             </Routes>
           </div>
         </>
