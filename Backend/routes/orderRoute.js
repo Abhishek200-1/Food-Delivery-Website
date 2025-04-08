@@ -1,6 +1,6 @@
 import express from 'express'
 import authMiddlerware from '../middleware/auth.js'
-import { placeOrder, verifyOrder, userOrders, listOrders, updateStatus } from '../controllers/orderController.js';
+import { placeOrder, verifyOrder, userOrders, listOrders, updateStatus, getDailySales } from '../controllers/orderController.js';
 // import { verify } from 'jsonwebtoken';
 
 
@@ -12,6 +12,7 @@ orderRouter.post("/verify", verifyOrder)
 orderRouter.post("/userorders", authMiddlerware, userOrders)
 orderRouter.get("/list", listOrders);
 orderRouter.post("/status", updateStatus);
+orderRouter.get("/daily-sales", getDailySales);
 
 
 
