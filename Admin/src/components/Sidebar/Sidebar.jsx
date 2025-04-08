@@ -37,7 +37,11 @@ const Sidebar = () => {
         </NavLink>
         <NavLink to='/promocodes' className="sidebar-option">
             <img src={assets.promo_icon} alt="" />
-            <p>PromoCode</p>
+            <p>PromoCodes</p>
+        </NavLink>
+        <NavLink to='/daily-sales-summery' className="sidebar-option">
+            <img src={assets.report_icon} alt="" />
+            <p>Daily Sales</p>
         </NavLink>
       </div>
     </div>
