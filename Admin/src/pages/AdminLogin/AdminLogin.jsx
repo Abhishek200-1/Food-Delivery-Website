@@ -26,7 +26,10 @@ const AuthContainer = styled(Box)({
   background: "#1e1e1e",
 });
 
-const StyledCard = styled(Card)(({ isRegistering }) => ({
+// ✅ Use shouldForwardProp to avoid passing `isRegistering` to DOM
+const StyledCard = styled(Card, {
+  shouldForwardProp: (prop) => prop !== 'isRegistering',
+})(({ isRegistering }) => ({
   display: "flex",
   flexDirection: "column",
   width: "100%",
@@ -62,11 +65,11 @@ const SocialButton = styled(IconButton)({
 
 const inputStyles = {
   "& .MuiInputBase-input::placeholder": {
-    color: "#b0b0b0", 
+    color: "#b0b0b0",
     opacity: 1,
   },
   "& .MuiInputLabel-root": {
-    color: "#b0b0b0", 
+    color: "#b0b0b0",
   },
 };
 
@@ -82,7 +85,7 @@ const AdminAuth = ({ onLoginSuccess }) => {
     password: "",
   });
   const [rememberMe, setRememberMe] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false); // Added state for terms
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -103,7 +106,7 @@ const AdminAuth = ({ onLoginSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (isRegistering && !termsAccepted) {
       alert("You must agree to the Terms and Conditions before registering.");
       return;
