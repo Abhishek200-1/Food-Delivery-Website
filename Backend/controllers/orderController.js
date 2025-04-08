@@ -112,4 +112,45 @@ const updateStatus = async (req, res) => {
     }
 };
 
-export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus };
+// Function to get daily sales data (Admin Panel)
+const getDailySales = async (req, res) => {
+    const { from, to } = req.query;
+  
+    // Build query based on optional date range
+    const matchQuery = { payment: true }; // Only paid orders
+  
+    if (from && to) {
+      matchQuery.createdAt = {
+        $gte: new Date(from),
+        $lte: new Date(new Date(to).setHours(23, 59, 59, 999))
+      };
+    }
+  
+    try {
+      const dailySales = await orderModel.aggregate([
+        { $match: matchQuery },
+        {
+          $group: {
+            _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            totalAmount: { $sum: "$amount" },
+            orderCount: { $sum: 1 }
+          }
+        },
+        { $sort: { _id: -1 } }
+      ]);
+  
+      const response = dailySales.map(sale => ({
+        date: sale._id,
+        totalAmount: sale.totalAmount,
+        orderCount: sale.orderCount
+      }));
+  
+      res.json({ success: true, data: response });
+    } catch (error) {
+      console.error("Daily Sales Fetch Error:", error);
+      res.status(500).json({ success: false, message: "Failed to fetch sales data" });
+    }
+  };
+  
+
+export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus, getDailySales };
