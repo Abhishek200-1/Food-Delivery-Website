@@ -116,7 +116,6 @@ const updateStatus = async (req, res) => {
 const getDailySales = async (req, res) => {
     const { from, to } = req.query;
   
-    // Build query based on optional date range
     const matchQuery = { payment: true }; // Only paid orders
   
     if (from && to) {
@@ -127,30 +126,22 @@ const getDailySales = async (req, res) => {
     }
   
     try {
-      const dailySales = await orderModel.aggregate([
-        { $match: matchQuery },
-        {
-          $group: {
-            _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
-            totalAmount: { $sum: "$amount" },
-            orderCount: { $sum: 1 }
-          }
-        },
-        { $sort: { _id: -1 } }
-      ]);
+      const orders = await orderModel.find(matchQuery).sort({ createdAt: -1 });
   
-      const response = dailySales.map(sale => ({
-        date: sale._id,
-        totalAmount: sale.totalAmount,
-        orderCount: sale.orderCount
+      const response = orders.map(order => ({
+        orderId: order._id,
+        date: order.createdAt.toISOString().split('T')[0],
+        amount: order.amount,
+        // Add more fields if needed like userName, items, etc.
       }));
   
       res.json({ success: true, data: response });
     } catch (error) {
-      console.error("Daily Sales Fetch Error:", error);
-      res.status(500).json({ success: false, message: "Failed to fetch sales data" });
+      console.error("Order Fetch Error:", error);
+      res.status(500).json({ success: false, message: "Failed to fetch order data" });
     }
   };
+  
   
 
 export { placeOrder, verifyOrder, userOrders, listOrders, updateStatus, getDailySales };
