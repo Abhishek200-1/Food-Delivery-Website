@@ -8,7 +8,9 @@ const orderSchema = new mongoose.Schema({
     status: { type: String, default: "Food Processing" },
     date: { type: Date, default: Date.now }, 
     payment: { type: Boolean, default: false }
-});
+},{
+    timestamps: true // ✅ this adds createdAt and updatedAt automatically
+  });
 
 // If model already exists, use it; otherwise, create a new one
 const orderModel = mongoose.models.order || mongoose.model("order", orderSchema);
