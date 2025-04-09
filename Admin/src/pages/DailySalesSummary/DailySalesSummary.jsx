@@ -3,13 +3,15 @@ import './DailySalesSummary.css';
 import axios from 'axios';
 
 const DailySalesSummary = () => {
-  const [dailySales, setDailySales] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const printRef = useRef();
 
-  const fetchDailySales = async () => {
+  const fetchOrders = async () => {
     setLoading(true);
     try {
       const res = await axios.get('http://localhost:3000/api/order/daily-sales', {
@@ -17,38 +19,93 @@ const DailySalesSummary = () => {
       });
 
       if (res.data && Array.isArray(res.data.data)) {
-        setDailySales(res.data.data);
+        setOrders(res.data.data);
       } else {
-        setDailySales([]);
+        setOrders([]);
       }
     } catch (err) {
-      console.error('Failed to fetch sales data', err);
-      setDailySales([]);
+      console.error('Failed to fetch order data', err);
+      setOrders([]);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchDailySales();
+    fetchOrders();
   }, []);
 
   const handleFilter = () => {
-    fetchDailySales();
+    setCurrentPage(1);
+    fetchOrders();
   };
 
   const handlePrint = () => {
-    const printContents = printRef.current.innerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    window.location.reload();
+    const printWindow = window.open('', '_blank');
+    const grouped = groupByDate(orders);
+    const grandTotal = orders.reduce((sum, order) => sum + order.amount, 0);
+
+    let html = `
+      <html>
+        <head>
+          <title>Print Summary</title>
+          <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+            th, td { border: 1px solid #ccc; padding: 8px; }
+            h2, h3 { margin-top: 20px; }
+            .total-row { font-weight: bold; }
+          </style>
+        </head>
+        <body>
+          <h2>📋 Paid Orders Report</h2>
+    `;
+
+    for (const date in grouped) {
+      const ordersOnDate = grouped[date];
+      const total = ordersOnDate.reduce((sum, order) => sum + order.amount, 0);
+      html += `
+        <h3>📅 On ${date}:</h3>
+        <table>
+          <thead>
+            <tr><th>Order ID</th><th>Amount (₹)</th></tr>
+          </thead>
+          <tbody>
+      `;
+      ordersOnDate.forEach(order => {
+        html += `<tr><td>${order.orderId}</td><td>₹ ${order.amount}</td></tr>`;
+      });
+      html += `<tr class="total-row"><td>Total</td><td>₹ ${total}</td></tr>`;
+      html += `</tbody></table>`;
+    }
+
+    html += `<h3 style="text-align: right;">Grand Total: ₹ ${grandTotal}</h3>`;
+    html += `</body></html>`;
+
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.print();
   };
+
+  // Pagination
+  const indexOfLast = currentPage * itemsPerPage;
+  const indexOfFirst = indexOfLast - itemsPerPage;
+  const currentOrders = orders.slice(indexOfFirst, indexOfLast);
+  const totalPages = Math.ceil(orders.length / itemsPerPage);
+
+  const groupByDate = (data) => {
+    return data.reduce((acc, order) => {
+      if (!acc[order.date]) acc[order.date] = [];
+      acc[order.date].push(order);
+      return acc;
+    }, {});
+  };
+
+  const groupedCurrentOrders = groupByDate(currentOrders);
 
   return (
     <div className="daily-sales-summary">
-      <h2>📊 Daily Sales Report</h2>
+      <h2>📋 Paid Orders Report</h2>
 
       <div className="filter-container">
         <label>From: <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} /></label>
@@ -59,32 +116,57 @@ const DailySalesSummary = () => {
 
       <div ref={printRef}>
         {loading ? (
-          <p>Loading sales data...</p>
+          <p>Loading order data...</p>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Total Sales (₹)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dailySales.length > 0 ? (
-                dailySales.map((sale) => (
-                  <tr key={sale.date}>
-                    <td>{sale.date}</td>
-                    <td>₹ {sale.totalAmount}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={2}>No data found</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+          Object.keys(groupedCurrentOrders).length > 0 ? (
+            Object.entries(groupedCurrentOrders).map(([date, ordersOnDate]) => {
+              const totalOfDay = ordersOnDate.reduce((sum, order) => sum + order.amount, 0);
+              return (
+                <div key={date} className="date-group">
+                  <h3>📅 On {date} :</h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Order ID</th>
+                        <th>Amount (₹)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ordersOnDate.map((order) => (
+                        <tr key={order.orderId}>
+                          <td>{order.orderId}</td>
+                          <td>₹ {order.amount}</td>
+                        </tr>
+                      ))}
+                      <tr className="total-row">
+                        <td><strong>💰 Total</strong></td>
+                        <td><strong>₹ {totalOfDay}</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              );
+            })
+          ) : (
+            <p>No data found</p>
+          )
         )}
       </div>
+
+      {/* Pagination */}
+      {orders.length > itemsPerPage && (
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+              className={currentPage === index + 1 ? 'active' : ''}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
