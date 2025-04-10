@@ -132,7 +132,10 @@ const getDailySales = async (req, res) => {
         orderId: order._id,
         date: order.createdAt.toISOString().split('T')[0],
         amount: order.amount,
-        // Add more fields if needed like userName, items, etc.
+        address: {
+          firstName: order.address?.firstName || '',
+          lastName: order.address?.lastName || ''
+        }
       }));
   
       res.json({ success: true, data: response });
@@ -141,6 +144,7 @@ const getDailySales = async (req, res) => {
       res.status(500).json({ success: false, message: "Failed to fetch order data" });
     }
   };
+  
   
   
 
