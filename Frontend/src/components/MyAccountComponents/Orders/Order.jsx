@@ -32,7 +32,7 @@ const Order = () => {
 
   const handlePrint = (order) => {
     const logo = assets.logo4 || 'https://via.placeholder.com/150x50?text=Logo';
-    const deliveryCharge = order.deliveryCharge || 30;
+    const deliveryCharge = order.deliveryCharge || 50;
     const grandTotal = order.amount + deliveryCharge;
 
     const itemsHTML = order.items.map(item => (

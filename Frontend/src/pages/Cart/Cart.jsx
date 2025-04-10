@@ -42,7 +42,7 @@ const Cart = () => {
 
   const calculateTotal = () => {
     const subtotal = getTotalCartAmount();
-    const deliveryFee = subtotal === 0 ? 0 : 15;
+    const deliveryFee = subtotal === 0 ? 0 : 50;
     const discountedTotal = subtotal - discount;
     return subtotal === 0 ? 0 : discountedTotal + deliveryFee;
   };
@@ -100,7 +100,7 @@ const Cart = () => {
             )}
             <div className="cart-total-details">
               <p>Delivery Fee</p>
-              <p>₹{getTotalCartAmount() === 0 ? 0 : 15}</p>
+              <p>₹{getTotalCartAmount() === 0 ? 0 : 50}</p>
             </div>
             <hr />
             <div className="cart-total-details">

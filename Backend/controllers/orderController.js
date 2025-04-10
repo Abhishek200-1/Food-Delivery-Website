@@ -35,14 +35,14 @@ const placeOrder = async (req, res) => {
             quantity: item.quantity
         }));
 
-        // Add delivery charges (15 INR)
+        // Add delivery charges (50 INR)
         line_items.push({
             price_data: {
                 currency: "inr",
                 product_data: {
                     name: "Delivery Charges"
                 },
-                unit_amount: 15 * 100 // Convert INR 15 to paisa
+                unit_amount: 50 * 100 // Convert INR 50 to paisa
             },
             quantity: 1
         });
