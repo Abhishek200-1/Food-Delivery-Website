@@ -71,7 +71,6 @@ const UserProfile = () => {
     setErrorMessage('');
     setSuccessMessage('');
   
-    // 🛑 New: Check for empty fields
     if (!currentPassword || !newPassword || !confirmPassword) {
       setErrorMessage("All password fields are required.");
       return;
