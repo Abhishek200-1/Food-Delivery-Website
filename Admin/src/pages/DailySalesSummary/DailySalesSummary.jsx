@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './DailySalesSummary.css';
 import axios from 'axios';
 
@@ -9,7 +9,6 @@ const DailySalesSummary = () => {
   const [toDate, setToDate] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const printRef = useRef();
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -91,7 +90,6 @@ const DailySalesSummary = () => {
     printWindow.print();
   };
 
-  // Pagination
   const indexOfLast = currentPage * itemsPerPage;
   const indexOfFirst = indexOfLast - itemsPerPage;
   const currentOrders = orders.slice(indexOfFirst, indexOfLast);
@@ -118,46 +116,42 @@ const DailySalesSummary = () => {
         <button onClick={handlePrint}>🖨️ Print</button>
       </div>
 
-      <div ref={printRef}>
-        {loading ? (
-          <p>Loading order data...</p>
-        ) : (
-          Object.keys(groupedCurrentOrders).length > 0 ? (
-            Object.entries(groupedCurrentOrders).map(([date, ordersOnDate]) => {
-              const totalOfDay = ordersOnDate.reduce((sum, order) => sum + order.amount, 0);
-              return (
-                <div key={date} className="date-group">
-                  <h3>📅 On {date} :</h3>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Amount (₹)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {ordersOnDate.map((order) => (
-                        <tr key={order.orderId}>
-                          <td>{order.orderId}</td>
-                          <td>{order.address?.firstName} {order.address?.lastName}</td>
-                          <td>₹ {order.amount}</td>
-                        </tr>
-                      ))}
-                      <tr className="total-row">
-                        <td colSpan="2"><strong>💰 Total</strong></td>
-                        <td><strong>₹ {totalOfDay}</strong></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              );
-            })
-          ) : (
-            <p>No data found</p>
-          )
-        )}
-      </div>
+      {loading ? (
+        <p>Loading order data...</p>
+      ) : Object.keys(groupedCurrentOrders).length > 0 ? (
+        Object.entries(groupedCurrentOrders).map(([date, ordersOnDate]) => {
+          const totalOfDay = ordersOnDate.reduce((sum, order) => sum + order.amount, 0);
+          return (
+            <div key={date} className="date-group">
+              <h3>📅 On {date} :</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th style={{ width: "35%" }}>Order ID</th>
+                    <th style={{ width: "40%" }}>Customer</th> 
+                    <th>Amount (₹)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ordersOnDate.map((order) => (
+                    <tr key={order.orderId}>
+                      <td>{order.orderId}</td>
+                      <td>{order.address?.firstName || ''} {order.address?.lastName || ''}</td>
+                      <td>₹ {order.amount}</td>
+                    </tr>
+                  ))}
+                  <tr className="total-row">
+                    <td colSpan="2"><strong>💰 Total</strong></td>
+                    <td><strong>₹ {totalOfDay}</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          );
+        })
+      ) : (
+        <p>No data found</p>
+      )}
 
       {/* Pagination */}
       {orders.length > itemsPerPage && (
