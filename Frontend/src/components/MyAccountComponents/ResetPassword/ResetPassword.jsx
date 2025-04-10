@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import "./ResetPassword.css";
-import { StoreContext } from "../../../context/StoreContext"; // Replace with your actual context path
+import { StoreContext } from "../../../context/StoreContext";
 import axios from "axios";
 
 const ResetPassword = () => {
