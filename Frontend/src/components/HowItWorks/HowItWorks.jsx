@@ -9,22 +9,22 @@ const HowItWorks = () => {
     {
       id: 1,
       image: assets.howitworks_img1,
-      title: "Pick Meals",
-      description: "Choose your meals from our diverse menu. Find low carbs & veggie options."
+      title: "Pick Your Meals",
+      description: "Browse our diverse menu and select your favorite dishes — including low-carb, vegan, and chef specials."
     },
     {
       id: 2,
       image: assets.howitworks_img2,
-      title: "Choose How Often",
-      description: "Our team of chefs do the prep work no more choppinf, measuring, or sink full of dishes."
+      title: "Set Your Schedule",
+      description: "Choose how often you want meals. Our chefs handle all the prep — no chopping, measuring, or mess."
     },
     {
       id: 3,
       image: assets.howitworks_img3,
-      title: "Fast Deliveries",
-      description: "Your freshly prepped 15-min food arrive on your doorstep in a well packed Container."
+      title: "Get It Delivered",
+      description: "Enjoy fast and fresh deliveries right to your doorstep in eco-friendly, sealed containers."
     }
-  ];
+  ];  
 
   return (
     <div className="how-it-works-container">

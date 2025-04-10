@@ -15,6 +15,7 @@ const images = [
 
 const Header = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [menu, setMenu] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +30,7 @@ const Header = () => {
       <div className="header-contents">
         <h2>Your Favourite Food Delivered Hot & Fresh</h2>
         <p>Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients and culinary expertise. Our mission is to satisfy your cravings and elevate your dining experience, one delicious meal at a time.</p>
-        <button>View Menu</button>
+        <button><a href='#explore-menu' onClick={() => setmenu("menu")} className={menu === "menu"?"active":""}>View Menu</a></button>
       </div>
     </div>
   );
