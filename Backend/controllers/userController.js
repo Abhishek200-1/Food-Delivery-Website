@@ -102,6 +102,24 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
+// verify email before reset
+const verifyEmail = async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.json({ success: false, message: "Email not found" });
+        }
+
+        res.json({ success: true, message: "Email verified" });
+    } catch (error) {
+        console.log("Verify Email Error:", error);
+        res.json({ success: false, message: "Something went wrong" });
+    }
+};
+
+
 // reset password
 const resetPassword = async (req, res) => {
     const { email, newPassword } = req.body;
@@ -126,4 +144,4 @@ const resetPassword = async (req, res) => {
 };
 
 
-export { loginUser, registerUser, getUserProfile, updateUserProfile, resetPassword };
+export { loginUser, registerUser, getUserProfile, updateUserProfile, resetPassword, verifyEmail };

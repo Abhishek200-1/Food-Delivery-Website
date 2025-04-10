@@ -15,21 +15,32 @@ const ResetPassword = () => {
       setError("Please enter an email.");
       return;
     }
-
-    // Basic client-side validation (optional)
+  
     if (!email.includes("@") || !email.includes(".")) {
       setError("Please enter a valid email address.");
       return;
     }
-
+  
     try {
-      // Optional: Verify if email exists (you can implement backend API for that)
-      setError("");
-      setStep(2);
+      const response = await fetch("http://localhost:3000/api/user/verify-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setError("");
+        setStep(2);
+      } else {
+        setError(data.message || "Email verification failed.");
+      }
     } catch (err) {
-      setError("Something went wrong while verifying email.");
+      console.error(err);
+      setError("Something went wrong. Please try again later.");
     }
-  };
+  };  
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
@@ -133,9 +144,9 @@ const ResetPassword = () => {
           {error && <p className="error-message">{error}</p>}
 
           <div className="button-group">
-  <button onClick={handleResetPassword}>Reset Password</button>
-  <button onClick={() => setPasswords({ new: "", confirm: "" })}>Reset Form</button>
-</div>
+            <button onClick={handleResetPassword}>Reset Password</button>
+            <button onClick={() => setPasswords({ new: "", confirm: "" })}>Reset Form</button>
+          </div>
         </div>
       )}
     </div>
