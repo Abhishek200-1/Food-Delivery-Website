@@ -128,7 +128,7 @@ const PromoCodeForm = () => {
             <label>Discount Type</label>
             <select name="discountType" value={form.discountType} onChange={handleChange}>
               <option value="percentage">Percentage</option>
-              <option value="fixed">Fixed</option>
+              {/* <option value="fixed">Fixed</option> */}
             </select>
           </div>
 
