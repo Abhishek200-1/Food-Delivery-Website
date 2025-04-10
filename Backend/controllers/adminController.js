@@ -67,3 +67,27 @@ export const changeAdminPassword = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const updateProfile = async (req, res) => {
+  const adminId = req.admin.id;
+  const { firstName, lastName, dateOfJoining, mobileNumber, address } = req.body;
+
+  try {
+    const updatedAdmin = await Admin.findByIdAndUpdate(
+      adminId,
+      { firstName, lastName, dateOfJoining, mobileNumber, address },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updatedAdmin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      admin: updatedAdmin,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+};
