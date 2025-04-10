@@ -52,7 +52,7 @@ const DailySalesSummary = () => {
           <style>
             body { font-family: Arial, sans-serif; padding: 20px; }
             table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-            th, td { border: 1px solid #ccc; padding: 8px; }
+            th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
             h2, h3 { margin-top: 20px; }
             .total-row { font-weight: bold; }
           </style>
@@ -68,14 +68,18 @@ const DailySalesSummary = () => {
         <h3>📅 On ${date}:</h3>
         <table>
           <thead>
-            <tr><th>Order ID</th><th>Amount (₹)</th></tr>
+            <tr><th>Order ID</th><th>Customer</th><th>Amount (₹)</th></tr>
           </thead>
           <tbody>
       `;
       ordersOnDate.forEach(order => {
-        html += `<tr><td>${order.orderId}</td><td>₹ ${order.amount}</td></tr>`;
+        html += `<tr>
+          <td>${order.orderId}</td>
+          <td>${order.address?.firstName || ''} ${order.address?.lastName || ''}</td>
+          <td>₹ ${order.amount}</td>
+        </tr>`;
       });
-      html += `<tr class="total-row"><td>Total</td><td>₹ ${total}</td></tr>`;
+      html += `<tr class="total-row"><td colspan="2">Total</td><td>₹ ${total}</td></tr>`;
       html += `</tbody></table>`;
     }
 
@@ -128,6 +132,7 @@ const DailySalesSummary = () => {
                     <thead>
                       <tr>
                         <th>Order ID</th>
+                        <th>Customer</th>
                         <th>Amount (₹)</th>
                       </tr>
                     </thead>
@@ -135,11 +140,12 @@ const DailySalesSummary = () => {
                       {ordersOnDate.map((order) => (
                         <tr key={order.orderId}>
                           <td>{order.orderId}</td>
+                          <td>{order.address?.firstName} {order.address?.lastName}</td>
                           <td>₹ {order.amount}</td>
                         </tr>
                       ))}
                       <tr className="total-row">
-                        <td><strong>💰 Total</strong></td>
+                        <td colSpan="2"><strong>💰 Total</strong></td>
                         <td><strong>₹ {totalOfDay}</strong></td>
                       </tr>
                     </tbody>
