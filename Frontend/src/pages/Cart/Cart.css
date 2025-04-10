@@ -149,6 +149,79 @@
     transform: scale(1.05);
 }
 
+.available-promocodes {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .available-promocodes h4 {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .available-promocodes ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .available-promocodes li {
+    background-color: #ffffff;
+    border: 1px dashed #ccc;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 14px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .available-promocodes li:hover {
+    background-color: #b9e3c9;
+    border-color: #00ff5ece;
+  }
+  
+  .available-promocodes li strong {
+    color: #1fa555;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  
+  .promo-expiry {
+    color: #888;
+    font-size: 12px;
+    margin-left: 4px;
+    font-style: italic;
+  }
+  
+  .copy-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1a8d48;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .copy-button:hover {
+    background-color: #18ba66;
+  }
+  
+
 /* Responsive Styles */
 @media (max-width: 750px) {
     .cart-button {
@@ -157,5 +230,9 @@
 
     .cart-promocode {
         justify-content: start;
+    }
+
+    .copy-button{
+        visibility: hidden;
     }
 }

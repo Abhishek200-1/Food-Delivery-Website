@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './Cart.css';
 import { StoreContext } from '../../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,20 @@ const Cart = () => {
   const [promoInput, setPromoInput] = useState('');
   const [discount, setDiscount] = useState(0);
   const [message, setMessage] = useState('');
+  const [promoCodes, setPromoCodes] = useState([]);
+
+  useEffect(() => {
+    const fetchPromoCodes = async () => {
+      try {
+        const res = await axios.get(`${url}/api/promocodes`);
+        const activePromos = res.data.promos.filter(promo => promo.isActive);
+        setPromoCodes(activePromos);
+      } catch (err) {
+        console.error("Failed to fetch promo codes", err);
+      }
+    };
+    fetchPromoCodes();
+  }, [url]);
 
   const handlePromoSubmit = async () => {
     try {
@@ -18,9 +32,8 @@ const Cart = () => {
         code: promoInput,
         totalAmount: getTotalCartAmount()
       });
-
-      setDiscount(res.data.discount); // Apply discount
-      setMessage(res.data.message);   // Show success message
+      setDiscount(res.data.discount);
+      setMessage(res.data.message);
     } catch (err) {
       setMessage(err.response?.data?.message || "Invalid promo code");
       setDiscount(0);
@@ -111,6 +124,35 @@ const Cart = () => {
               <button onClick={handlePromoSubmit}>Submit</button>
             </div>
             {message && <p style={{ color: discount > 0 ? 'green' : 'red', marginTop: '10px' }}>{message}</p>}
+
+            {promoCodes.length > 0 && (
+              <div className="available-promocodes">
+                <h4 style={{ marginTop: '20px', marginBottom: '10px', color: '#555' }}>
+                  Get discount by applying promocode below:
+                </h4>
+                <ul>
+                  {promoCodes.map((promo) => (
+                      <li key={promo._id}>
+                      <strong>{promo.code}</strong> - 
+                      {promo.discountType === "percentage"
+                        ? ` ${promo.discountValue}% off`
+                        : ` ₹${promo.discountValue} off`}
+                      {promo.minOrderAmount && ` (Min: ₹${promo.minOrderAmount})`}
+                      {promo.maxDiscountAmount && `, Max: ₹${promo.maxDiscountAmount}`}
+                      {promo.expiryDate && (
+                        <span className="promo-expiry">, Expires: {new Date(promo.expiryDate).toLocaleDateString()}</span>
+                      )}
+                      <button className="copy-button" onClick={() => {
+                        navigator.clipboard.writeText(promo.code);
+                        setMessage(`Copied "${promo.code}"!`);
+                      }}>
+                        Copy
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>
