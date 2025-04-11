@@ -42,7 +42,7 @@ const removeFood = async (req,res) =>{
         // by this we can delete image data 
         fs.unlink(`uploads/${food.image}`, ()=> {})
         // by this we are deletinng all data
-        await foodModel.findOneAndDelete(req.body.id);
+        await foodModel.findByIdAndDelete(req.body.id);
         res.json({success:true, message:"Food removed successfully"})
     } catch (error) {
         console.log(error);
