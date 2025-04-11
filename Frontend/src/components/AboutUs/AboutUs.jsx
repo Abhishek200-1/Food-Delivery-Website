@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "./AboutUs.css"; // Import CSS file
 import { assets } from "../../assets/assets";
 
 const AboutUs = () => {
+  const [menu, setMenu] = useState("");
+
   return (
     <div className="about-container" id="about-us">
       <div className="about-content">
@@ -39,7 +41,7 @@ const AboutUs = () => {
           With a network of top-rated restaurants and a team of dedicated delivery partners, 
           we ensure fast, reliable, and quality service. Your cravings, our responsibility!
           </p>
-          <button className="learn-more-btn">Order Now</button>
+          <button className="learn-more-btn"><a href='#explore-menu' onClick={() => setmenu("menu")} className={menu === "menu"?"active":""}>Order Now</a></button>
         </motion.div>
 
       </div>

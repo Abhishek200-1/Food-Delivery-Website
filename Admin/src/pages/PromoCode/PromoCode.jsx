@@ -83,7 +83,7 @@ const PromoCodeForm = () => {
       if (!currentStatus) {
         // Was inactive, now activated
         Swal.fire({
-          title: "Activated!",
+          title: "Mark As Activated!",
           text: "Promo code is now Active.",
           icon: "success",
           confirmButtonColor: "#28a745", // Green
@@ -91,7 +91,7 @@ const PromoCodeForm = () => {
       } else {
         // Was active, now inactivated
         Swal.fire({
-          title: "Inactivated!",
+          title: "Mark As Inactivated!",
           text: "Promo code is now Inactive.",
           icon: "warning",
           confirmButtonColor: "#dc3545", // Red
@@ -225,7 +225,7 @@ const PromoCodeForm = () => {
                     <button onClick={() => handleDelete(promo._id)}>Delete</button>
                     <button
                       style={{
-                        backgroundColor: promo.isActive ? "#dc3545" : "#28a745",
+                        backgroundColor: promo.isActive ? "#28a745" : "#dc3545",
                         color: "white",
                         border: "none",
                         padding: "4px 10px",
@@ -234,7 +234,7 @@ const PromoCodeForm = () => {
                       }}
                       onClick={() => handleToggleStatus(promo._id, promo.isActive)}
                     >
-                      {promo.isActive ? "Inactivate" : "Activate"}
+                      {promo.isActive ? "Mark As Inactivate" : "Mark As Activate"}
                     </button>
                   </div>
                 </li>
