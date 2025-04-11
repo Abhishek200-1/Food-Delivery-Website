@@ -128,6 +128,15 @@
     background-color: #246c45;
 }
 
+.order-date-group h3 {
+    text-align: left;      /* Align date text to the left */
+    margin: 20px 0 10px;   /* Some spacing around date */
+    font-size: 18px;
+    color: #2E8B57;
+  }
+  
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .order-card {

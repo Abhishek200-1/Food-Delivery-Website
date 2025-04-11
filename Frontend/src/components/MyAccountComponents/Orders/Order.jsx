@@ -30,6 +30,17 @@ const Order = () => {
     fetchOrders();
   }, [token]);
 
+  const groupOrdersByDate = (orders) => {
+    const grouped = {};
+    orders.forEach(order => {
+      const dateObj = new Date(order.date);
+      const date = `${String(dateObj.getDate()).padStart(2, '0')}/${String(dateObj.getMonth() + 1).padStart(2, '0')}/${dateObj.getFullYear()}`;
+      if (!grouped[date]) grouped[date] = [];
+      grouped[date].push(order);
+    });
+    return grouped;
+  };
+
   const handlePrint = (order) => {
     const logo = assets.logo4 || 'https://via.placeholder.com/150x50?text=Logo';
     const deliveryCharge = order.deliveryCharge || 50;
@@ -159,29 +170,36 @@ const Order = () => {
     printWindow.print();
   };
 
+  const groupedOrders = groupOrdersByDate(orders);
+
   return (
     <div className="order-section">
       <h2>My Orders</h2>
-      <div className="order-container">
-        {orders.length === 0 ? (
-          <p className="no-orders">No orders found.</p>
-        ) : (
-          orders.map((order, index) => (
-            <div key={index} className="order-card">
-              <img className="order-image" src={assets.order_icon} alt="Order Icon" />
-              <div className="order-details">
-                <p className="order-items">
-                  {order.items.map((item, idx) => `${item.name} x ${item.quantity}${idx < order.items.length - 1 ? ', ' : ''}`)}
-                </p>
-                <p className="order-price">&#8377; {order.amount}.00</p>
-                <button className="print-btn" onClick={() => handlePrint(order)}>
-                  Print Bill
-                </button>
-              </div>
+      {Object.keys(groupedOrders).length === 0 ? (
+        <p className="no-orders">No orders found.</p>
+      ) : (
+        Object.entries(groupedOrders).map(([date, dateOrders], idx) => (
+          <div key={idx} className="order-date-group">
+            <h3>{date}</h3>
+            <div className="order-container">
+              {dateOrders.map((order, index) => (
+                <div key={index} className="order-card">
+                  <img className="order-image" src={assets.order_icon} alt="Order Icon" />
+                  <div className="order-details">
+                    <p className="order-items">
+                      {order.items.map((item, idx) => `${item.name} x ${item.quantity}${idx < order.items.length - 1 ? ', ' : ''}`)}
+                    </p>
+                    <p className="order-price">&#8377; {order.amount}.00</p>
+                    <button className="print-btn" onClick={() => handlePrint(order)}>
+                      Print Bill
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))
-        )}
-      </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };
